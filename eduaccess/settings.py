@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party apps
+    'rest_framework',
+    'rest_framework.authtoken',
 
     # local apps
     'accounts',
@@ -86,6 +89,8 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.EduUser'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -124,3 +129,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets/')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/')
+]
+
+# Rest framework
+
+REST_FRAMEWORK= {
+    'DEFAULT_PERMISSIONS_CLASSES' :[
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES' :[
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

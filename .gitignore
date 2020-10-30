@@ -1,3 +1,6 @@
 # created by virtualenv automatically
 venv/*
-
+__pycache__/
+assets
+db.sqlite3
+migrations
