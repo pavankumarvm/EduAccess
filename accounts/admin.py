@@ -20,4 +20,4 @@ class EduUserAdmin(UserAdmin):
         ('Important Dates', {'fields': ('date_joined', 'last_login')}),
     )
 
-admin.site.register(EduUser)
+admin.site.register(EduUser, EduUserAdmin)
