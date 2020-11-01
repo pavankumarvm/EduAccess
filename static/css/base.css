@@ -4,11 +4,6 @@
     z-index: 10;
     height: 100px;
 }
-.logoimg {
-
-    
-    clip-path: circle();
-}
 .navbar-brand img{
     height: 100px;
     padding-left: 80px;
