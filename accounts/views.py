@@ -85,3 +85,8 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('/')
+
+def feedback_user(request):
+    return render(request,
+                    'feedback.html',
+                )

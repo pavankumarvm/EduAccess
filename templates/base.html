@@ -17,14 +17,8 @@
 		{% endblock head %}
 	</head>
 	<body>
-
-		{% comment %} 
-		<a href="accounts/register/">Register</a>
-		<a href="accounts/login">Login</a> {% endcomment %}
-
-		
 		<section id="nav-bar">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0 fixed-top">
 				<a class="navbar-brand " href="#Home"><img src="{% static 'images\logo1.png' %}" class="logoimg" alt="logo" style="width:50px;height:50px; clip-path: circle()"  ></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				  <span class="navbar-toggler-icon"></span>
@@ -36,9 +30,18 @@
 					</li>
 					{% if user.is_active %}
 						<h2> Hii, {{user.username}}</h2>
-						<li class="nav-item">
-							<a class="nav-link" href="/accounts/logout/">Logout</a>
-						</li>
+						<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         User
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/accounts/logout/">Logout</a>
+          <a class="dropdown-item" href="/accounts/feedback/">Feedback Us</a>
+          <div class="dropdown-divider"></div>
+          
+        </div>
+      </li>
+						
 					{% else %}
 					<li class="nav-item">
 					  <a class="nav-link" href="/accounts/login/">Login</a>

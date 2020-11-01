@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>Feedback Form</title>
+ 	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">		
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/feed.css' %}" />
+{% endblock head %}
+
+{% block body %}
+   <div class="view" >
+	<img src="{% static 'images/feed.svg' %}">
+</div>
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			
+			<h1 class="text-center mt-5 font-weight-bold">Feedback</h1>
+			<hr class="bg-white">
+			<h6 class="text-center">Please write your feedback below:</h6>
+			<h3 class="mt-4" style="text-align: center;">How do you rate your overall experience?</h3>
+
+			<form style="text-align: center;">
+				<label class="radio-inline"><input type="radio" name="experience" value="bad">Bad</label>
+				<label class="radio-inline"><input type="radio" name="experience" value="bad">Average</label>
+				<label class="radio-inline"><input type="radio" name="experience" value="bad">Good</label>
+				<label class="radio-inline"><input type="radio" name="experience" value="bad">Excellent</label>
+			</div>
+			</div>					
+
+			
+
+			<div class="row">
+				<div class="col-md-2"></div>
+				<h4 class="col-md-8 text-center mt-5 font-weight-bold">Comment your views<br>
+					<textarea id="message" required="" placeholder="Write your experience here..." cols="40" rows="5"></textarea></h4>
+			</div>
+
+						<div class="row">
+				<div class="col-md-2"></div>
+				<button class="btn btn-primary mt-5" style=" position: absolute;  margin: 0;
+  position: absolute;
+  
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);">Submit</button>
+			</div>
+			</form>
+</div>
+{% endblock body %} 
+
