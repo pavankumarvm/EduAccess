@@ -1,10 +1,22 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(edu.jpg);
+    background-size: cover;
+    background-position: relative;
+    font-family: sans-serif;
+}
+
 .login-section{
     margin: 0;
     padding: 0;
     background-size: cover;
     background-position: relative;
     font-family: sans-serif;
+    
 }
+
+
 
 .login-box{
     width: 320px;

@@ -1,69 +1,53 @@
-
-
-
-.carousel-caption h5 {
- 
-  font-weight: 600;
-  font-size: 50px;
-
-  color: #fff;
-}
-
-.login-container {
+.register-section {
   margin: 0;
   padding: 0;
-  background-image: url(jerry-zhou-5_UkFNpURas-unsplash.jpg);
   background-size: cover;
   background-position: relative;
   font-family: sans-serif;
-  position: relative;
-  display: block;
 }
 
-.login-box {
+.register-box {
   width: 320px;
-  height: 470px;
+  height: 700px;
+
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
-  top: 50%;
+  top: 70%;
   left: 50%;
-  padding-bottom: 100px;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-bottom: 30px;
   position: absolute;
-  display: block;
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
-  margin-top: 100px;
-  transform: translateY(+5%);
-  transform: translateX(-60%);
-  position: relative;
+  padding: 70px 30px;
 }
+
 .avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  position: relative;
-  margin-top: 10px;
+  position: absolute;
   top: -50px;
   left: calc(50% - 50px);
 }
+
 h1 {
   margin: 0;
   padding: 0 0 20px;
   text-align: center;
   font-size: 22px;
 }
-.login-box p {
+
+.register-box p {
   margin: 0;
   padding: 0;
   font-weight: bold;
 }
-.login-box input {
+
+.register-box input {
   width: 100%;
   margin-bottom: 20px;
 }
-.login-box input[type="text"],
+
+.register-box input[type="text"],
 input[type="password"] {
   border: none;
   border-bottom: 1px solid #fff;
@@ -73,7 +57,8 @@ input[type="password"] {
   color: #fff;
   font-size: 16px;
 }
-.login-box input[type="submit"] {
+
+.register-box input[type="submit"] {
   border: none;
   outline: none;
   height: 40px;
@@ -82,12 +67,19 @@ input[type="password"] {
   font-size: 18px;
   border-radius: 20px;
 }
-.login-box input[type="submit"]:hover {
+
+.register-box input[type="submit"]:hover {
   cursor: pointer;
   background: #39dc79;
   color: #000;
 }
 
-#login-contain {
-  margin-bottom: 200px;
+.register-box a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
+}
+
+.register-box a:hover {
+  color: #39dc79;
 }

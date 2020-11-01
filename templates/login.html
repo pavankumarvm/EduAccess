@@ -7,7 +7,9 @@
 {% endblock head %}
 
 {% block body %}
-    <div class="login-section" style="background-image:url({% static 'images/edu.jpg' %})">
+
+    <div class="login-section" >
+    <img src="{% static 'images/book.jpg' %}" style="width:100%;height: auto;" >
         <div class="login-box">
             <img src="{% static 'images/avatar.png' %}" class="avatar">
             <h1>Login Here</h1>
@@ -22,6 +24,7 @@
             </form>
         </div>
     </div>
+    
 {% endblock body %}
 
 

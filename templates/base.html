@@ -17,14 +17,15 @@
 		{% endblock head %}
 	</head>
 	<body>
+
 		{% comment %} 
 		<a href="accounts/register/">Register</a>
 		<a href="accounts/login">Login</a> {% endcomment %}
 
-		<!---NavigationBar--->
+		
 		<section id="nav-bar">
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<a class="navbar-brand" href="#Home"><img src="{% static 'images\logo.png' %}" alt="logo"></a>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+				<a class="navbar-brand " href="#Home"><img src="{% static 'images\logo1.png' %}" class="logoimg" alt="logo" style="width:50px;height:50px; clip-path: circle()"  ></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				  <span class="navbar-toggler-icon"></span>
 				</button>
@@ -50,8 +51,7 @@
 				</div>
 			  </nav>
 		</section>
-		{% block body %}
-		{% endblock body %}
+		
 		<script
 			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -62,5 +62,8 @@
 			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 			crossorigin="anonymous"
 		></script>
+
+		{% block body %}
+		{% endblock body %}
 	</body>
 </html>
