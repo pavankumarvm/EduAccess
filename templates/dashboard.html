@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+    <title>DashBoard</title>
+{% endblock head %}
+{% block body %}
+    <div class="main">
+        <div class="dashboard-panel">
+            <div class="menu">
+            <table class="options">
+                <th>Options</th>
+                <tr><td id="1" class="option">Personal Details</td></tr>
+                <tr><td id="2" class="option">Contact Details</td></tr>
+                <tr><td id="3" class="option">Academic Details</td></tr>
+                <tr><td id="4" class="option">Past Test Results</td></tr>
+                <tr><td id="5" class="option">Option</td></tr>
+                </table>
+            <div class="about">
+                <h2>About us</h2>
+                <p> EduAccess
+                </p>
+            </div>
+        </div>
+        </div>
+        <div class="page">
+            <div class="pages contents hide">
+                username
+                first_name
+                last_name
+                email
+                phone no
+                data_joined
+                last_login
+            </div>
+            <div class="pages contents hide">
+                fullname
+                gender
+                birthdate
+                tenth_brd
+                twelth_brd
+                tenth_per
+                twelth_per
+            </div>
+            <div class="pages contents hide"></div>
+        </div>
+    </div>
+    <!-- <script>
+        var previous;
+        previous=$('pages').get(0);
+        $(function(){
+            $('.option').click(function(){
+                var a = $(this).attr('id');
+                console.log(a);
+                console.log($('pages').get(a-1));
+                var display = $('pages').get(a-1);
+                previous.className += " hide";
+                display.className="pages contents";
+                previous=display;
+            })
+        })
+    </script> -->
+{% endblock body %}

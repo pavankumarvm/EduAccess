@@ -1,0 +1,53 @@
+.main{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns:300px auto;
+    width:100%;
+    position: absolute;
+    bottom:60px;
+    top:50px;
+}
+.dashboard-panel{
+    width:300px;
+    height:100%;
+    scroll-behavior:smooth;
+    border-right:5px solid grey;
+    background-color: darkgray;
+    z-index: 1;
+    padding:5px auto;
+}
+.options{
+    display:grid;
+    height:100%;
+}
+.menu{
+    text-align:center;
+    width:100%;
+    font-size:25px;
+}
+.options td{
+    height:60px;
+    font-size:25px;
+    text-align:left;
+    padding:10px 20px;
+    width:300px;
+    box-shadow:0px 2px 0px gray;
+}
+
+.about{
+    margin-top:110px;
+    margin-bottom:10px;
+    font-size: 20px;
+}
+.page{
+    width:100%;
+}
+.contents{
+    height:100%;
+    width:100%;
+    scroll-behavior: auto;
+    display: block;
+}
+/* .hide{
+    display:none;
+}

@@ -148,5 +148,11 @@ REST_FRAMEWORK= {
     ]
 }
 
+# Email settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = '127.0.0.1'
+# EMAIL_PORT = '8000'
+# EMAIL_HOST_USER = '12345'
+# EMAIL_HOST_PASSWORD = '12345'
+# EMAIL_USE_TSL = True
