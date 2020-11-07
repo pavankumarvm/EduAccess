@@ -1,0 +1,69 @@
+body{
+    background-color: purple;
+    margin-top: 200px;
+}
+
+p{
+    text-align: center;
+    font-weight: 600;
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+
+h1{
+    text-align: left;
+    margin-left: 400px;
+    font-size: 40px;
+}
+
+hr{
+    width: 50%;
+    border: 0.5px solid black;
+}
+
+#Stream{
+    margin-left: 600px;
+    margin-top: 30px;
+}
+
+
+#Degree{
+    margin-left: 60px;
+    margin-top: 30px;
+}
+
+#Cut-off{
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+label{
+    margin-left: 600px;
+    margin-top: 30px;
+}
+
+input[type="submit"]
+{   border-radius: 12px; 
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 50px;
+    padding-top: 15px;
+    margin-top: 15px;
+    margin-left: 700px;
+    margin-top: 30px;
+    font-size: 30px;
+    
+}
+
+input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}

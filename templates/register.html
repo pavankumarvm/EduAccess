@@ -1,58 +1,55 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}" />
-    <title>Register</title>
-{% endblock head %}
-
-{% block body %}
-    <div class="register-section" >
-        
-        {% if error %}
-            <!-- Notification section -->
-            <div id="myModal" class="modal">
-                <!-- Notification content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <img src="{% static 'icons/alert.png' %}" alt="Alert: "/>
-                    <p>{{message}}</p>
-                </div>
-            </div>
-        {% endif %}
-        <img src="{% static 'images/book.jpg' %}" style="width:100%;height: auto;" >
-        <div class="register-box">
-            <img src="{% static 'images/avatar.png' %}" class="avatar" />
-            <h1>Sign up</h1>
-            <form method="POST" >
-                {% csrf_token %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}" />
+<title>Register</title>
+{% endblock head %} {% block body %}
+<div class="register-section">
+    {% if error %}
+    <!-- Notification section -->
+    <div id="myModal" class="modal">
+        <!-- Notification content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="{% static 'icons/alert.png' %}" alt="Alert: " />
+            <p>{{message}}</p>
+        </div>
+    </div>
+    {% endif %}
+    <img src="{% static 'images/book.jpg' %}" style="width: 100%; height: auto" />
+    <div class="register-box">
+        <img src="{% static 'images/avatar.png' %}" class="avatar" />
+        <h1>Sign up</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div style="float: left ">
                 <p>Username</p>
-                <input type="text" name="username" placeholder="Enter Username" />
+                <input type="text" class="username" name="username" placeholder="Enter Username" />
                 <p>First Name</p>
                 <input type="text" name="first_name" placeholder="Enter Firstname" />
                 <p>Last Name</p>
-                <input type="text" name="last_name" placeholder="Enter lastname" />
-                <p>E-mail</p>
-                <input type="text" name="email" placeholder="Enter E-mail" />
-                <p>Password</p>
-                <input type="password" name="password1" placeholder="Enter Password" />
-                <p>Confirm Password</p>
-                <input type="password" name="password2" placeholder="Enter Password" />
-
-                <input type="submit" value="Register"/>
-            </form>
+                <input type="text" class="name" name="last_name" placeholder="Enter lastname" />
+            </div>
+        <div style="float: right;">
+            <p>E-mail</p>
+            <input type="text" name="email" placeholder="Enter E-mail" />
+            <p>Password</p>
+            <input type="password" name="password1" placeholder="Enter Password" />
+            <p>Confirm Password</p>
+            <input type="password" name="password2" placeholder="Enter Password" />
         </div>
+            <input type="submit" value="Register" />
+        </form>
     </div>
-    <script>
-        var modal = document.getElementById("myModal");
-        var span = document.getElementsByClassName("close")[0];
-        span.onclick = function() {
+</div>
+<script>
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
         modal.style.display = "none";
+    };
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-{% endblock body %} 
-
+    };
+</script>
+{% endblock body %}

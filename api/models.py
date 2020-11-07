@@ -1,11 +1,13 @@
 from django.db import models
 import uuid
 
+from django.db.models.fields import NullBooleanField
 from accounts.models import EduUser
 # Create your models here.
 
 GENDER = (('Male','Male'), ('Female','Female'),('Others',('Others')))
 BOARD = (('SB','SB'),('CBSE','CBSE'),('ICSE','ICSE'),('IB','IB'))
+
 
 class Student(models.Model):
     student_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -27,3 +29,15 @@ class Subject(models.Model):
     std = models.CharField(max_length=4,default=None, choices=STD)
     sub_name = models.CharField(max_length=20, blank=True,null=True)
     marks = models.IntegerField(blank=True,null=True)
+
+CHOICES = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
+class Feedback(models.Model):
+    sno= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    comment = models.TextField()
+    # experience = models.CharField(max_length=10, choices=CHOICES, default=None)
+    # print(experience, comment)
+
+    def __str__(self):
+        return 'Message from ' + self.comment
+    
+

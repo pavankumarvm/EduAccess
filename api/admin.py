@@ -3,6 +3,7 @@ from django.contrib.admin import ModelAdmin
 
 # Register your models here.
 from .models import Student, Subject
+from .models import Feedback
 
 class StudentAdmin(ModelAdmin):
 
@@ -28,3 +29,4 @@ class SubjectAdmin(ModelAdmin):
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Subject, SubjectAdmin)
+admin.site.register(Feedback)
