@@ -1,12 +1,11 @@
-from django import forms
+# from django import forms
+# from .models import Student
 
-CHOICES = [('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent')]
+# CHOICES = [('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent')]
 
-class SimpleForm(forms.Form):
-    # birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
-    experience = forms.ChoiceField(
-        required=False,
-        widget=forms.RadioSelect,
-        choices=CHOICES,
-    )
 
+
+# class StuForm(forms.ModelForm):  
+#     class Meta:  
+#         model = Student  
+#         fields = "__all__"  
