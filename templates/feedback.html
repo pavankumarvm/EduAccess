@@ -24,6 +24,7 @@
 
 			<form style="text-align: center;" method = "POST" action="/feedback/">
 				{% csrf_token %}
+				<!-- {{ form }} -->
 				<label class="radio-inline"><input type="radio" name="experience" value="bad">Bad</label>
 				<label class="radio-inline"><input type="radio" name="experience" value="bad">Average</label>
 				<label class="radio-inline"><input type="radio" name="experience" value="bad">Good</label>

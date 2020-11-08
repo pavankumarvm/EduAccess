@@ -30,7 +30,7 @@ class Subject(models.Model):
     sub_name = models.CharField(max_length=20, blank=True,null=True)
     marks = models.IntegerField(blank=True,null=True)
 
-CHOICES = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
+# CHOICES = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
 class Feedback(models.Model):
     sno= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
