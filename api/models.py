@@ -67,3 +67,12 @@ class Feedback(models.Model):
 
     def __str__(self):
         return 'Message from ' + self.comment
+<<<<<<< HEAD
+=======
+    
+# class Student(models.Model):  
+#     first_name = models.CharField(max_length=20)  
+#     last_name  = models.CharField(max_length=30)  
+#     class Meta:  
+#         db_table = "student"  
+>>>>>>> be5ea6c7a3c14d3f275571f8a8a20bcd81d97eac
