@@ -21,9 +21,9 @@ class StudentAdmin(ModelAdmin):
 
 
 class SubjectAdmin(ModelAdmin):
-    ordering = ('id',)
+    ordering = ('subject_id',)
     fieldsets = (
-        (None,{'fields': ('id', 'student_id', 'std', 'sub_name', 'marks')}),
+        (None,{'fields': ('subject_id', 'student_id', 'std', 'sub_name', 'marks')}),
     )
 
 

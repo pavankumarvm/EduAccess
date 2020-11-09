@@ -11,7 +11,7 @@ class EduUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required= False)
     class Meta:
         model = UserModel
-        fields = ['username', 'password', 'email', 'first_name', 'last_name', 'date_joined', 'last_login', 'is_staff', 'is_superuser', 'is_active']
+        fields = ['username', 'password', 'email', 'first_name', 'last_name', 'date_joined', 'last_login', 'is_college_admin' ,'is_active']
         read_only_fields = ['date_joined', 'last_login']
 
     def create(self, validated_data):

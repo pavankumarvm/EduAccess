@@ -56,24 +56,24 @@
                 </div>
               </div>
             <div class="pages contents hide">
-                username
-                first_name
-                last_name
-                email
-                phone no
-                data_joined
-                last_login
-            </div>
-            <div class="pages contents hide">
-                fullname
-                gender
-                birthdate
-                tenth_brd
-                twelth_brd
-                tenth_per
-                twelth_per
-            </div>
-            <div class="pages contents hide"></div>
+                {{username}}<br>
+                {{first_name}}<br>
+                {{last_name}}<br>
+                {{email}}<br>
+                {{phone_no}}<br>
+                {{data_joined}}<br>
+                {{last_login}}<br>
+                {{full_name}}<br>
+                {{gender}}<br>
+                {{birthdate}}<br>
+                {{tenth_brd}}<br>
+                {{twelth_brd}}<br>
+                {{tenth_per}}<br>
+                {{twelth_per}}<br>
+              {% for subject in subjects %}
+                  {{subject}}<br>
+              {% endfor %}
+              </div>
         </div>
     </div>
     <!-- <script>

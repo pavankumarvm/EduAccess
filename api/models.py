@@ -29,8 +29,6 @@ class College(models.Model):
     college_city = models.CharField(max_length=25, blank=False, null=False)
 
 
-
-
 class Stream(models.Model):
     stream_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     college = models.ForeignKey(College, on_delete=models.CASCADE)
@@ -40,15 +38,16 @@ class Stream(models.Model):
 
 STD = (('10th', '10th'), ('12th', '12th'))
 class Subject(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,editable=False)
+    subject_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="subjects")
     std = models.CharField(max_length=4,default=None, choices=STD)
     sub_name = models.CharField(max_length=20, blank=True,null=True)
     marks = models.IntegerField(blank=True,null=True)
 
+
 ANSWER = (('A','A'), ('B','B'), ('C','C'), ('D','D'))
 class Question(models.Model):
-    question_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    question_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     question = models.CharField(max_length=250, null=False, blank=False)
     option_A = models.CharField(max_length=250, null=True, blank=True)
     option_B = models.CharField(max_length=250, null=True, blank=True)
@@ -67,12 +66,9 @@ class Feedback(models.Model):
 
     def __str__(self):
         return 'Message from ' + self.comment
-<<<<<<< HEAD
-=======
     
 # class Student(models.Model):  
 #     first_name = models.CharField(max_length=20)  
 #     last_name  = models.CharField(max_length=30)  
 #     class Meta:  
 #         db_table = "student"  
->>>>>>> be5ea6c7a3c14d3f275571f8a8a20bcd81d97eac

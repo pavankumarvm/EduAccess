@@ -55,12 +55,12 @@ def login_user(request):
             if user.is_college_admin:
                 return redirect('/')
             else:
-                return redirect('/dashboard/')
+                return redirect('/dashboard/' + username + '/')
         else:
             messages.error(request, 'Wrong username or password.')
             return render(request,
                     template_name='login.html',
-                    )
+                )
     else:
         return render(request,
                     template_name='login.html',
