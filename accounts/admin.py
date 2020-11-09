@@ -7,7 +7,7 @@ from .models import EduUser
 class EduUserAdmin(UserAdmin):
 
     ordering = ('username',)
-    list_display = ('username', 'email', 'is_staff',)
+    list_display = ('username', 'email', 'is_college_admin',)
     search_fields = ('username', 'email',)
     readonly_fields = ('date_joined', 'last_login',)
     
@@ -16,7 +16,7 @@ class EduUserAdmin(UserAdmin):
     fieldsets = (
         (None,{'fields': ('username', 'password')}),
         ('Personal Information',{'fields' : ('first_name', 'last_name', 'email')}),
-        ('Permissions',{'fields': ('is_staff', 'is_superuser', 'is_active')}),
+        ('Permissions',{'fields': ('is_staff', 'is_college_admin', 'is_superuser', 'is_active')}),
         ('Important Dates', {'fields': ('date_joined', 'last_login')}),
     )
 

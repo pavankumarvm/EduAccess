@@ -3,53 +3,53 @@
 <title>Register</title>
 {% endblock head %} {% block body %}
 <div class="register-section">
-    {% if error %}
-    <!-- Notification section -->
-    <div id="myModal" class="modal">
-        <!-- Notification content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img src="{% static 'icons/alert.png' %}" alt="Alert: " />
-            <p>{{message}}</p>
-        </div>
+    <!-- <img src="{% static 'images/book.jpg' %}" style="width: 100%; height: auto; z-index:1; position: absolute;" /> -->
+    <form method="POST" class="register-form">
+    <div class="student">
+        <img src="{% static 'images/student.png' %}" class="student-img" />
+        <label class="container">I am Student
+            <input type="radio" checked="checked" name="usertype" value="S">
+            <span class="checkmark"></span>
+        </label>
     </div>
-    {% endif %}
-    <img src="{% static 'images/book.jpg' %}" style="width: 100%; height: auto" />
     <div class="register-box">
         <img src="{% static 'images/avatar.png' %}" class="avatar" />
         <h1>Sign up</h1>
-        <form method="POST">
+        
             {% csrf_token %}
-            <div style="float: left ">
                 <p>Username</p>
                 <input type="text" class="username" name="username" placeholder="Enter Username" />
-                <p>First Name</p>
-                <input type="text" name="first_name" placeholder="Enter Firstname" />
-                <p>Last Name</p>
-                <input type="text" class="name" name="last_name" placeholder="Enter lastname" />
-            </div>
-        <div style="float: right;">
-            <p>E-mail</p>
-            <input type="text" name="email" placeholder="Enter E-mail" />
-            <p>Password</p>
-            <input type="password" name="password1" placeholder="Enter Password" />
-            <p>Confirm Password</p>
-            <input type="password" name="password2" placeholder="Enter Password" />
-        </div>
+                <div class="name">
+                    <div>
+                        <p>First Name</p>
+                        <input type="text" name="first_name" placeholder="Enter Firstname" />
+                    </div>
+                    <div>
+                        <p>Last Name</p>
+                        <input type="text" name="last_name" placeholder="Enter lastname" />
+                    </div>
+                </div>
+                <p>E-mail</p>
+                <input type="text" name="email" placeholder="Enter E-mail" />
+                <div class="password">
+                    <div>
+                        <p>Password</p>
+                        <input type="password" name="password1" placeholder="Enter Password" />
+                    </div>
+                    <div>
+                        <p>Confirm Password</p>
+                        <input type="password" name="password2" placeholder="Enter Password" />
+                    </div>
+                </div>
             <input type="submit" value="Register" />
-        </form>
     </div>
+    <div class="college">
+        <img src="{% static 'images/college.png' %}" class="college-img" />
+        <label class="container">I am College Admin
+            <input type="radio" name="usertype" value="A">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    </form>
 </div>
-<script>
-    var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-</script>
 {% endblock body %}

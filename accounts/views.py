@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login, logout
 from django.shortcuts import redirect
 from django.urls import reverse_lazy,reverse
 from django.core.mail import send_mail
+from django.contrib import messages
 
 from .serializers import EduUserSerializer
 from .models import EduUser,Otp
@@ -14,6 +15,7 @@ from .models import EduUser,Otp
 
 def register_user(request):
     if request.method == 'POST':
+        usertype = request.POST.get('usertype')
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -22,36 +24,21 @@ def register_user(request):
         password2 = request.POST.get('password2')
  
         if not (username and first_name and last_name and email and password1 and password2):
-            data = {
-                'error': 'true',
-                'message': 'Fill the Empty Fields.', 
-            }
+            messages.error(request, 'Fill the Empty Fields.')
         elif password1 == password2:
             if EduUser.objects.filter(username=username):
-                data = {
-                    'error': 'true',
-                    'message': 'Username already exists.Try another.', 
-                }
-                return render(request, 'register.html', context=data)
+                messages.error(request, 'Username already exists.Try another.')
+                return render(request, 'register.html')
             elif EduUser.objects.filter(email=email):
-                data = {
-                    'error': 'true',
-                    'message': 'Email Address already exists.Try another.', 
-                }
-                return render(request, 'register.html', context=data)
+                messages.error(request, 'Email Address already exists.Try another.')
+                return render(request, 'register.html')
             else:
-                user = EduUser.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
-                data = {
-                    'error' : 'false',
-                    'message' : 'User registered successfully.'
-                }
+                user = EduUser.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name, usertype=usertype)
+                messages.success(request, 'User registered successfully.')
                 return redirect("/accounts/login/")
         else:
-            data = {
-                'error': 'true',
-                'message': "Passwords doesn't match", 
-            }
-            return render(request, 'register.html', context=data)
+            messages.error(request,"Passwords doesn't match")
+            return render(request, 'register.html')
     else:
         return render(request, 
                     template_name='register.html')
@@ -61,22 +48,18 @@ def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if EduUser.objects.filter(username=username):
-            user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password)
+        if user is not None:
             login(request, user)
-            data = {
-                'error': 'false',
-                'message': 'Login Successfull.',
-            }
-            return redirect('/')
+            messages.success(request, 'Logged in successfully.')
+            if user.is_college_admin:
+                return redirect('/')
+            else:
+                return redirect('/dashboard/')
         else:
-            data = {
-                'error': 'true',
-                'message': 'Wrong username or password.',
-            }
+            messages.error(request, 'Wrong username or password.')
             return render(request,
                     template_name='login.html',
-                    context=data,
                     )
     else:
         return render(request,
@@ -85,6 +68,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
+    messages.success(request, 'Logged out successfully.')
     return redirect('/')
     
 def random_otp():
@@ -105,20 +89,14 @@ def forgot_password(request):
             if Otp.objects.filter(user=user):
                 otp_obj = Otp.objects.get(user=user)
                 if (datetime.now(timezone.utc) - otp_obj.otp_valid_time).total_seconds() < 120 and otp_obj.no_of_attempts == 0:
-                    data = {'otp': 'not generated',
-                            'error': 'true',
-                            'message': 'Please try after 30 minutes'
-                            }
-                Otp.objects.filter(user=user).delete()
+                    messages.error(request, 'Please try after 30 minutes')
+                    Otp.objects.filter(user=user).delete()
             else:
                 random_str = random_otp()
                 otp_obj = Otp(user=user, otp=random_str)
                 otp_obj.save()
 
-                data = {
-                    'error': 'false',
-                    'message': 'OTP generated successfully'
-                }
+                messages.success(request, 'OTP generated successfully')
 
                 mail_message = "You're receiving this email because you requested a password reset\nfor your user account at EduAccess.\n\n\tOTP is : "
                 mail_message += random_str
@@ -135,11 +113,8 @@ def forgot_password(request):
                 )
                 return redirect(reverse('reset-password'))
         else:
-            data = {
-                'error': 'true',
-                'message': 'User is not present with Email'
-            }
-        return render(request, 'forgot_password.html', data)
+            messages.error(request,'No user registered with : '+ email)
+        return render(request, 'forgot_password.html')
     else:
         return render(request, 'forgot_password.html')
 
@@ -151,46 +126,28 @@ def reset_password(request):
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_password')
         if new_password != confirm_password:
-            data = {
-                'error' : 'true',
-                'message' : "Password doesn't match",
-            }
+            messages.error(request, "Password doesn't match")
             return render(request, 'reset_password.html', data)
         if EduUser.objects.filter(email=email):
             user = EduUser.objects.get(email=email)
             if Otp.objects.filter(user=user):
                 otp_obj = Otp.objects.get(user=user)
                 if otp_obj.no_of_attempts == 0:
-                    data = {
-                        'error': 'true',
-                        'message': 'No. of attempts exceeded limit.',
-                    }
+                    messages.error(request, 'No. of attempts exceeded limit.')
                     return render(request, 'reset_password.html', data)
                 if otp_obj.otp != OTP:
-                    data = {
-                        'error': 'true',
-                        'message': 'OTP is incorrect.'
-                    }
+                    messages.error(request, 'OTP is incorrect.')
                     return render(request, 'reset_password.html', data)
                 user.set_password(new_password)
                 user.save()
                 otp_obj.delete()
-                data = {
-                    'error': 'false',
-                    'message': 'Password Changed Succesfully.'
-                }
+                messages.success(request, 'Password Changed Succesfully.')
                 return redirect('/accounts/login')
             else:
-                data = {
-                    'error': 'true',
-                    'message': 'OTP expired. Regenrate OTP.',
-                }
+                messages.error(request, 'OTP expired. Regenrate OTP.')
                 return render(request, 'forgot_password.html', data)
         else:
-            data = {
-                'error': 'true',
-                'message': 'Email is incorrect.',
-            }
+            messages.error(request, 'email is incorrect.')
         return render(request, 'reset_password.html', data)
     else:
         return render(request, 'reset_password.html')

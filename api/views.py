@@ -9,13 +9,10 @@ class HomePageView(TemplateView):
 class StudentProfileView(TemplateView):
     template_name = 'dashboard.html'
 
-# class FeedbackView(TemplateView):
-#     template_name = 'feedback.html'
-
 class StreamDetailsView(TemplateView):
     template_name = 'StreamDetails.html'
     
-def FeedbackView(request):
+def feedbackView(request):
     
     if request.method == 'POST':
         comment = request.POST.get('comment')
@@ -28,34 +25,3 @@ def FeedbackView(request):
         else:
             messages.success(request, 'Successfully submitted')   
     return render(request, template_name = 'feedback.html')    
-
-
-# def stream_user(request):
-#     return render(request,
-#                     'StreamDetails.html',
-#                 )
-
-# def college_user(request):
-#     return render(request,
-#                     'clgdetails.html',
-#                 )                
-
-# def manageclg_user(request):
-#     return render(request,
-#                     'ManageClg.html',
-#                 )                
-
-# def training_user(request):
-#     return render(request,
-#                     'TrainingData.html',
-#                 )   
-
-# def viewstd_user(request):
-#     return render(request,
-#                     'ViewStudents.html',
-#                 )                              
-
-# def questions_user(request):
-#     return render(request,
-#                     'Questions.html',
-#                 )        

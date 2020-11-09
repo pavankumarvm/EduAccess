@@ -16,6 +16,7 @@ class EduUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, blank=False, null=False, unique=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
+    is_college_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
