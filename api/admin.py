@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
 # Register your models here.
-from .models import Student, Subject
+from .models import Student, Subject, College, Question, Stream
 from .models import Feedback
 
 class StudentAdmin(ModelAdmin):
@@ -29,4 +29,5 @@ class SubjectAdmin(ModelAdmin):
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Subject, SubjectAdmin)
+admin.site.register(Question)
 admin.site.register(Feedback)

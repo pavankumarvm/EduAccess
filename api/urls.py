@@ -1,14 +1,14 @@
 from django.urls import path
 
-from .views import HomePageView, StudentProfileView
+from .views import HomePageView, StudentProfileView, AptitudeTestView
 from . import views
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('dashboard/<str:username>/', StudentProfileView.as_view() , name="dashboard"),
-    # path('stream/', StreamDetailsView.as_view(), name="stream"),
-    # path('aptitude_test/', AptitudeDetailsView.as_view(), name="aptitude_test"),
+    path('test/', AptitudeTestView.as_view(), name="aptitude_test"),
     path('feedback/', views.feedbackView, name="feedback"),
+    # path('stream/', StreamDetailsView.as_view(), name="stream"),
     #  path('college/', views.college, name="college"),
     #  path('manageclg/', views.manageclg, name="manageclg"),
     #  path('training/', views.training, name="training"),

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Aptitude Questions</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}" />
+
+{% endblock head %}
+
+{% block body %}
+<h1>Aptitude Test</h1>
+<div class="test-container">
+	<div class="question-numbers">
+		<p>Questions</p>
+		{% for question in test %}
+			<li id="{{ question.question_id }}" class="number" onclick="thisQuestion(this)"></li>
+		{% endfor %}
+	</div>
+	<form method="POST">
+		<div class="questions">
+			<ol id="question-slide">
+			  {% for question in test %}
+				  <li id="{{ question.question_id }}" class="slide">
+					  <div class="question"> 
+						  <strong>Question: </strong>{{question.question }}
+					  </div>
+					  <div class="answers">
+						  <label>
+							  <input type="radio" name="{{ question.question_id }}" value="A">
+							  {{question.option_A }}
+						  </label>
+						  <label>
+							  <input type="radio" name="{{ question.question_id }}" value="B">
+							  {{question.option_B }}
+						  </label>
+						  <label>
+							  <input type="radio" name="{{ question.question_id }}" value="C">
+							  {{question.option_C }}
+						  </label>
+						  <label>
+							  <input type="radio" name="{{ question.question_id }}" value="D">
+							  {{question.option_D }}
+						  </label>
+					  </div>
+				  </li>
+			  {% endfor %}
+			</ol>
+		</div>
+		<div class="submit-container">
+			<button type="button" id="previous" class="button">Previous Question</button>
+			<button type="button" id="next" class="button">Next Question</button>
+			<button type="submit" id="submit">End Test</button>
+		</div>
+	</form>
+</div>
+<script>	
+		// Variables
+		const previousButton = document.getElementById("previous");
+		const nextButton = document.getElementById("next");
+		const slides = document.querySelectorAll(".slide");
+		const q_numbers = document.querySelectorAll('.number');
+		let currentSlide = 0;
+
+		// Functions
+
+		function showSlide(n) {
+			slides[currentSlide].classList.remove('active-slide');
+			q_numbers[currentSlide].classList.remove('active-question');
+			slides[n].classList.add('active-slide');
+			q_numbers[n].classList.add('active-question');
+			currentSlide = n;
+			if(currentSlide === 0){
+				previousButton.classList.add('fade_it');
+			}
+			else{
+				previousButton.classList.remove('fade_it');
+			}
+			if(currentSlide === slides.length-1){
+				nextButton.classList.add('fade_it');
+			}
+			else{
+				nextButton.classList.remove('fade_it');
+			}
+		}
+	
+		function showNextSlide() {
+			if(currentSlide != slides.length-1)
+				showSlide(currentSlide + 1);
+		}
+	
+		function showPreviousSlide() {
+			if(currentSlide != 0)
+				showSlide(currentSlide - 1);
+		}
+
+		// Show the first slide
+		(function(){
+			let questions = Array.from(q_numbers);
+			questions.forEach(elem => elem.innerHTML = questions.indexOf(elem) + 1);
+			showSlide(currentSlide);
+		})();
+	
+		function thisQuestion(question){
+			let slides_array = Array.from(slides);
+			showSlide(slides_array.findIndex(elem => elem.id === question.id));
+		}
+		
+		// Event listeners
+		previousButton.addEventListener("click", showPreviousSlide);
+		nextButton.addEventListener("click", showNextSlide);
+</script>
+
+{% endblock body %}
+

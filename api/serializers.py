@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Student, Subject
+from .models import Student, Subject, Question
 
 class StudentSerializer(serializers.ModelSerializer):
     """
@@ -26,3 +26,16 @@ class SubjectSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         return Subject.objects.create(**validated_data)
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    """
+        Serialize the data
+    """
+    class Meta:
+        model = Question
+        fields = ['question_id', 'question', 'option_A', 'option_B', 'option_C', 'option_D', 'answer', 'explanation', 'given_by']
+        read_only_fields = ['given_by']
+    
+    def create(self, validated_data):
+        return Question.objects.create(**validated_data)
