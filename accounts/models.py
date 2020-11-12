@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser
@@ -9,8 +10,8 @@ from .managers import EduUserManager
 class EduUser(AbstractBaseUser, PermissionsMixin):
 
     # Creates User
-
-    username = models.CharField(max_length=35, primary_key=True, unique=True, blank=False, null=False)
+    user_id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable=False)
+    username = models.CharField(max_length=35, unique=True, blank=False, null=False)
     first_name = models.CharField(max_length=30, blank=False, null=False)
     last_name = models.CharField(max_length=30, blank=False, null=False)
     email = models.EmailField(max_length=50, blank=False, null=False, unique=True)
@@ -35,8 +36,12 @@ class EduUser(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return True
 
+    class Meta:
+        db_table = 'eduuser'
+
 class Otp(models.Model):
     user = models.OneToOneField(EduUser, on_delete=models.CASCADE)
     otp = models.CharField(max_length=6)
     otp_valid_time = models.DateTimeField(auto_now_add=True)
     no_of_attempts = models.IntegerField(default = 5)
+    

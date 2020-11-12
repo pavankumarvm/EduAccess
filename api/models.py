@@ -14,13 +14,16 @@ class Student(models.Model):
     student_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(EduUser, on_delete=models.CASCADE,unique=True)
     full_name = models.CharField(max_length=50, blank=True, null=True)
-    gender = models.CharField(max_length=10, choices=GENDER, default=None)
+    gender = models.CharField(max_length=10, choices=GENDER, default=None, null=True)
     birth_date = models.DateField(blank=True, null=True)
     phone_no = models.CharField(max_length=10, blank=True, null=True)
-    tenth_per = models.DecimalField(decimal_places=2, max_digits=4)
-    twelth_per = models.DecimalField(decimal_places=2, max_digits=4)
-    tenth_brd = models.CharField(max_length=5, choices=BOARD, null=False, blank=False)
-    twelth_brd = models.CharField(max_length=5, choices=BOARD, null=False, blank=False)
+    tenth_per = models.DecimalField(decimal_places=2, max_digits=4, null=True)
+    twelth_per = models.DecimalField(decimal_places=2, max_digits=4, null=True)
+    tenth_brd = models.CharField(max_length=5, choices=BOARD, null=True, blank=False)
+    twelth_brd = models.CharField(max_length=5, choices=BOARD, null=True, blank=False)
+
+    class Meta:
+        db_table = 'student'
 
 class College(models.Model):
     college_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -29,12 +32,19 @@ class College(models.Model):
     college_address = models.CharField(max_length=100, blank=True, null=True)
     college_city = models.CharField(max_length=25, blank=False, null=False)
 
+    
+    class Meta:
+        db_table = 'college'
+
 
 class Stream(models.Model):
     stream_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     college = models.ForeignKey(College, on_delete=models.CASCADE)
     stream_name = models.CharField(max_length=20, blank=False, null=False)
     cut_off = models.DecimalField(decimal_places=2, max_digits=4)
+
+    class Meta:
+        db_table = 'stream'
 
 
 STD = (('10th', '10th'), ('12th', '12th'))
@@ -45,6 +55,9 @@ class Subject(models.Model):
     sub_name = models.CharField(max_length=20, blank=True,null=True)
     marks = models.IntegerField(blank=True,null=True)
 
+    
+    class Meta:
+        db_table = 'subject'
 
 ANSWER = (('A','A'), ('B','B'), ('C','C'), ('D','D'))
 class Question(models.Model):
@@ -59,6 +72,8 @@ class Question(models.Model):
     explanation = models.CharField(max_length=250, null=True, blank=True)
     given_by = models.ForeignKey(EduUser, on_delete=models.SET_NULL, related_name='author',null=True)
 
+    class Meta:
+        db_table = 'question'
 
 CHOICES = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
 class Feedback(models.Model):
@@ -67,7 +82,6 @@ class Feedback(models.Model):
     
     rating = models.CharField(max_length=20, choices=CHOICES, null=True, blank=True)
     # experience = models.CharField(max_length=10, choices=CHOICES, default=None)
-    print(rating, comment)
 
     def __str__(self):
         return 'Message from ' + self.comment

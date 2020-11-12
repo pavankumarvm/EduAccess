@@ -7,6 +7,7 @@
       "sidenav main"
       "sidenav footer";
     height: 100vh;
+    margin-top: 60px;
   }
   
   /* Give every child element its grid name */

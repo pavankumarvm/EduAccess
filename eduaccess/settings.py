@@ -160,5 +160,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_USE_TSL = True
 
 MESSAGE_TAGS = {
+    messages.SUCCESS: 'success',
     messages.ERROR: 'danger'
 }
