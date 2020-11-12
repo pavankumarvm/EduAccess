@@ -3,6 +3,7 @@ import uuid
 
 from django.db.models.fields import NullBooleanField
 from accounts.models import EduUser
+from django import forms
 # Create your models here.
 
 GENDER = (('Male','Male'), ('Female','Female'),('Others',('Others')))
@@ -63,8 +64,10 @@ CHOICES = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Exc
 class Feedback(models.Model):
     sno= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
+    
+    rating = models.CharField(max_length=20, choices=CHOICES, null=True, blank=True)
     # experience = models.CharField(max_length=10, choices=CHOICES, default=None)
-    # print(experience, comment)
+    print(rating, comment)
 
     def __str__(self):
         return 'Message from ' + self.comment

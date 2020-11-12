@@ -73,8 +73,9 @@ class StudentProfileView(TemplateView):
 def feedbackView(request):
     if request.method == 'POST':
         comment = request.POST.get('comment')
+        rating = request.POST.get('rating')
         # experience = request.POST.get('experience')
-        FeedbackView = Feedback(comment = comment)
+        FeedbackView = Feedback(comment = comment, rating = rating)
         FeedbackView.save()
         
         if len(comment)<4:
