@@ -15,7 +15,8 @@
 			<li id="{{ question.question_id }}" class="number" onclick="thisQuestion(this)"></li>
 		{% endfor %}
 	</div>
-	<form method="POST">
+	<form action="/results/" id="answers" method="POST" onsubmit="confirmBox('Are you sure you want to submit test?');return submit_or_not();">
+		{% csrf_token %}
 		<div class="questions">
 			<ol id="question-slide">
 			  {% for question in test %}
@@ -52,6 +53,16 @@
 		</div>
 	</form>
 </div>
+<div id=alert-container>
+	<div class="confirm">
+		  <div id="confirmMessage">Confirm text</div>
+		  <div>
+			<input id="confirmYes" type="button" value="Yes" />
+			<input id="confirmNo" type="button" value="No" />
+		  </div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>	
 		// Variables
 		const previousButton = document.getElementById("previous");
@@ -59,7 +70,8 @@
 		const slides = document.querySelectorAll(".slide");
 		const q_numbers = document.querySelectorAll('.number');
 		let currentSlide = 0;
-
+		var started = false;
+		var Submit= false;
 		// Functions
 
 		function showSlide(n) {
@@ -91,14 +103,73 @@
 			if(currentSlide != 0)
 				showSlide(currentSlide - 1);
 		}
+	
+		const ui = {
+			confirm: async (message) => createConfirm(message)
+		}
 
+		const createConfirm = (message) => {
+			return new Promise((complete, failed)=>{
+				$('#confirmMessage').text(message)
+
+				$('#confirmYes').off('click');
+				$('#confirmNo').off('click');
+				
+				$('#confirmYes').on('click', ()=> {
+					$('#alert-container').hide()
+					$('.confirm').hide();
+					if(!started){
+					let questions = Array.from(q_numbers);
+					questions.forEach(elem => elem.innerHTML = questions.indexOf(elem) + 1);
+					showSlide(currentSlide);
+					started = true;
+					console.log("Test started");
+					}
+					else{
+						Submit = true;
+						console.log("Test submitted");
+					}
+					complete(true);
+				});
+				$('#confirmNo').on('click', ()=> {
+					$('#alert-container').hide()
+					$('.confirm').hide();
+					if(!started){
+						location.href = '/';
+						console.log("Test not started");
+					}
+					else{	
+						var alert_container = document.getElementById('alert-container');
+						alert_container.style.display = 'none';
+						Submit = false;
+						console.log("Test not submitted");
+					}
+					complete(false);
+				});
+				$('#alert-container').show();
+				$('.confirm').show();
+			});
+		}
+
+		function submit_or_not(){
+			console.log("HIII");
+			return Submit;
+		}		
+				
+		const confirmBox = async (message) => {
+			const confirm = await ui.confirm(message);
+			// if(confirm){
+			// 	alert("All the best!!!");
+			// }
+			// else{
+			// 	alert("")
+			// }
+		}
 		// Show the first slide
 		(function(){
-			let questions = Array.from(q_numbers);
-			questions.forEach(elem => elem.innerHTML = questions.indexOf(elem) + 1);
-			showSlide(currentSlide);
+			confirmBox('Do you want ot start test?');
 		})();
-	
+
 		function thisQuestion(question){
 			let slides_array = Array.from(slides);
 			showSlide(slides_array.findIndex(elem => elem.id === question.id));

@@ -1,34 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/streamdetails.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/seekcollege.css' %}" />
 {% endblock head %}
 
 {% block body %}
- <p>College Cut Off Details</p>
-    <h1>Stream Details</h1>
-    <hr> 
-    <form>
-        <select id="Stream" name="Stream">
-           <option value="">--Select Main Stream--</option>
-          <option value="Science">Science</option>
-         <option value="Commerce">Commerce</option>
-         <option value="Arts">Arts</option>
-        </select>
+    <div class="seekcollege">
+        <p>Seek College Here</p>
+        <h1>Hii {{user.first_name}},
+            <span>Here, you can check the various colleges based on stream and their respective cut-off.
+            </span>
+        </h1>
+        <hr> 
+        <form method="POST">
+            <div>
+            <select id="stream" name="stream">
+                <option value="">--Select Your 12<super>th</super> Stream--</option>
+                <option value="Science">Science</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Arts">Arts</option>
+            </select>
 
-        <select id="Degree" name="Degree">
-            <option value="">--Select Stream--</option>
-            <option value="BE">BE</option>
-             <option value="BCOM">BCOM</option>
-         <option value="BBA">BBA</option>
-         <option value="BFM">BFM</option>
-         <option value="BMS">BMS</option>
-         <option value="MCOM">MCOM</option>
-       </select>
-       <br>
-       <label  for="Cut-off">Cut-off</label>
-        <input type="number" name="Cut-off" id="Cut-off">
-        <br>
-        <input type="submit" name="submit" value="Submit">
-     </form>
+            <select id="degree" name="degree">
+                <option value="">--Select Stream--</option>
+                <option value="BE">BE</option>
+                <option value="BCOM">BCOM</option>
+                <option value="BBA">BBA</option>
+                <option value="BFM">BFM</option>
+                <option value="BMS">BMS</option>
+                <option value="MCOM">MCOM</option>
+            </select>
+            </div>
+            <br>
+            <label  for="Cut-off">Cut-off</label>
+            <input type="number" name="cut_off" id="cut_off">
+            <br>
+            <input type="submit" name="submit" value="Submit" class="submit">
+        </form>
+        <hr>
+        <div class="search_results">
+            
+        </div>
+    </div>
 {% endblock body %}

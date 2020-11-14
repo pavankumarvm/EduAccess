@@ -21,6 +21,7 @@ class Student(models.Model):
     twelth_per = models.DecimalField(decimal_places=2, max_digits=4, null=True)
     tenth_brd = models.CharField(max_length=5, choices=BOARD, null=True, blank=False)
     twelth_brd = models.CharField(max_length=5, choices=BOARD, null=True, blank=False)
+    twelth_stream = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
         db_table = 'student'
@@ -39,7 +40,7 @@ class College(models.Model):
 
 class Stream(models.Model):
     stream_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
+    college_id = models.ForeignKey(College, on_delete=models.CASCADE, related_name="streams")
     stream_name = models.CharField(max_length=20, blank=False, null=False)
     cut_off = models.DecimalField(decimal_places=2, max_digits=4)
 
@@ -59,6 +60,7 @@ class Subject(models.Model):
     class Meta:
         db_table = 'subject'
 
+
 ANSWER = (('A','A'), ('B','B'), ('C','C'), ('D','D'))
 class Question(models.Model):
     question_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -75,19 +77,12 @@ class Question(models.Model):
     class Meta:
         db_table = 'question'
 
-CHOICES = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
+
+RATING = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
 class Feedback(models.Model):
     sno= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
-    
-    rating = models.CharField(max_length=20, choices=CHOICES, null=True, blank=True)
-    # experience = models.CharField(max_length=10, choices=CHOICES, default=None)
+    rating = models.CharField(max_length=20, choices=RATING, null=True, blank=True)
 
     def __str__(self):
         return 'Message from ' + self.comment
-    
-# class Student(models.Model):  
-#     first_name = models.CharField(max_length=20)  
-#     last_name  = models.CharField(max_length=30)  
-#     class Meta:  
-#         db_table = "student"  
