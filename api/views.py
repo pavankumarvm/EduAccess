@@ -1,16 +1,20 @@
 import random
 import pandas as pd
 import os
+from datetime import datetime, timezone
 from eduaccess.settings import BASE_DIR
+
 
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.shortcuts import redirect
 
 from accounts.models import EduUser
-from .models import Student, Subject, Question,Feedback
+from .models import Student, Subject, Question,Feedback, Test
 from .serializers import StudentSerializer, SubjectSerializer, QuestionSerializer
+from .serializers import TestSerializer
 from accounts.serializers import EduUserSerializer
 # from .forms import StuForm  
 
@@ -43,6 +47,7 @@ class SeekCollegeView(TemplateView):
 
 class AptitudeTestView(TemplateView):
 	template_name = 'test.html'
+	test = []
 
 	def get(self, request):
 		# Question.objects.all().delete()
@@ -55,15 +60,69 @@ class AptitudeTestView(TemplateView):
 			all_questions.append({**serializer.data})
 		# print(all_questions)
 
-		# test = []
-		# while len(test)<10 and len(all_questions)>0:
-		#     i = random.randint(0, len(all_questions)-1)
-		#     test.append(all_questions[i])
-		#     all_questions.remove(all_questions[i])
-		# print(test)
+		student = Student.objects.get(user=request.user)
+		test_obj = None
+		for test in Test.objects.filter(student_id=student):
+			if (datetime.now(timezone.utc) - test.date_appeared).total_seconds() < 1800:
+				test_obj = test
+		if test_obj== None:
+			test_obj = Test.objects.create(student_id=student)
+		test_id = test_obj.test_id
+		# Test.objects.all().delete()
+
+		while len(self.test)<30 and len(all_questions)>0:
+		    i = random.randint(0, len(all_questions)-1)
+		    self.test.append(all_questions[i])
+		    all_questions.remove(all_questions[i])
+		# print(self.test)
 		
-		data = {'test' : all_questions}
+		data = {'test' : self.test,
+				'test_id' : test_id,
+				}
 		return render(request, 'test.html', data)
+
+	def post(self, request):
+		result = 0
+		test_id = request.POST.get('test_id')
+		for question in self.test:
+			answered = request.POST.get(question['question_id'])
+			correct_answer = str(question['answer']).upper()
+			# print(answered, correct_answer)
+			if answered == correct_answer:
+				result += 1
+		test_obj = Test.objects.get(test_id=test_id)
+		test_obj.result = result
+		test_obj.save()
+		# print(result)
+
+		return redirect('/results/')
+
+
+class ResultsView(TemplateView):
+	template_name = 'results.html'
+
+	def get(self, request):
+		student = Student.objects.get(user=request.user)
+		data = {
+			'appeared' : False,
+		}
+		tests = []
+		if Test.objects.filter(student_id=student):
+			data['appeared'] = True
+			queryset = Test.objects.filter(student_id=student)
+			for test in queryset:
+				serializer = TestSerializer(test)
+				test_data = serializer.data
+				if test_data['result'] == None:
+					test_obj = Test.objects.get(test_id=test_data['test_id'])
+					test_obj.delete()
+				else:
+					dt = test.date_appeared
+					test_data['date'] = dt.date()
+					test_data['time'] = dt.timetz()
+					tests.append({**test_data})
+		data['tests'] = tests
+		return render(request, 'results.html', data)
 
 
 class StudentProfileView(TemplateView):

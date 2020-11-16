@@ -14,8 +14,11 @@
 		{% for question in test %}
 			<li id="{{ question.question_id }}" class="number" onclick="thisQuestion(this)"></li>
 		{% endfor %}
+		<div class="test_id">
+			<h2>Test Id: </h2>{{test_id}}
+		</div>
 	</div>
-	<form action="/results/" id="answers" method="POST" onsubmit="confirmBox('Are you sure you want to submit test?');return submit_or_not();">
+	<form id="answers" method="POST" onsubmit="return confirm('Are you sure you want to submit test?');">
 		{% csrf_token %}
 		<div class="questions">
 			<ol id="question-slide">
@@ -49,7 +52,7 @@
 		<div class="submit-container">
 			<button type="button" id="previous" class="button">Previous Question</button>
 			<button type="button" id="next" class="button">Next Question</button>
-			<button type="submit" id="submit">End Test</button>
+			<button type="submit" id="submit" name="test_id" value="{{ test_id }}">End Test</button>
 		</div>
 	</form>
 </div>
@@ -125,10 +128,10 @@
 					started = true;
 					console.log("Test started");
 					}
-					else{
-						Submit = true;
-						console.log("Test submitted");
-					}
+					// else{
+					// 	Submit = true;
+					// 	console.log("Test submitted");
+					// }
 					complete(true);
 				});
 				$('#confirmNo').on('click', ()=> {
@@ -138,32 +141,24 @@
 						location.href = '/';
 						console.log("Test not started");
 					}
-					else{	
-						var alert_container = document.getElementById('alert-container');
-						alert_container.style.display = 'none';
-						Submit = false;
-						console.log("Test not submitted");
-					}
+					// else{	
+					// 	var alert_container = document.getElementById('alert-container');
+					// 	alert_container.style.display = 'none';
+					// 	Submit = false;
+					// 	console.log("Test not submitted");
+					// }
 					complete(false);
 				});
 				$('#alert-container').show();
 				$('.confirm').show();
 			});
 		}
-
-		function submit_or_not(){
-			console.log("HIII");
-			return Submit;
-		}		
-				
+		
 		const confirmBox = async (message) => {
 			const confirm = await ui.confirm(message);
-			// if(confirm){
-			// 	alert("All the best!!!");
-			// }
-			// else{
-			// 	alert("")
-			// }
+			if(confirm){
+				alert("\n        All the best!!!\n\n         Try your Best.");
+			}
 		}
 		// Show the first slide
 		(function(){

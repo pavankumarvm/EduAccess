@@ -3,7 +3,7 @@ from django.contrib.admin import ModelAdmin
 
 # Register your models here.
 from .models import Student, Subject, College, Question, Stream
-from .models import Feedback
+from .models import Feedback, Test
 
 class StudentAdmin(ModelAdmin):
 
@@ -26,8 +26,16 @@ class SubjectAdmin(ModelAdmin):
         (None,{'fields': ('subject_id', 'student_id', 'std', 'sub_name', 'marks')}),
     )
 
+class QuestionAdmin(ModelAdmin):
+    ordering = ('category','question_id',)
+    list_display = ('category', 'question', 'answer', 'given_by')
+    fieldsets = (
+        (None,{'fields': ('category','question_id', 'question', 'option_A', 'option_B', 'option_C', 'option_D', 'answer', 'explanation', 'given_by')}),
+    )
+
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Subject, SubjectAdmin)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Test)
 admin.site.register(Feedback)

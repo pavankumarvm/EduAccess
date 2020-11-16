@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Student, Subject, Question
+from .models import Student, Subject, Question, Test
 
 class StudentSerializer(serializers.ModelSerializer):
     """
@@ -39,3 +39,15 @@ class QuestionSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         return Question.objects.create(**validated_data)
+
+class TestSerializer(serializers.ModelSerializer):
+    """
+        Serialize the data
+    """
+    class Meta:
+        model = Test
+        fields = ['test_id', 'student_id', 'result', 'date_appeared']
+        read_only_fields = ['test_id', 'student_id']
+
+    def create(self, validated_data):
+        return Test.objects.create(**validated_data)

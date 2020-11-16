@@ -61,7 +61,7 @@ class Subject(models.Model):
         db_table = 'subject'
 
 
-ANSWER = (('A','A'), ('B','B'), ('C','C'), ('D','D'))
+ANSWER = (('a','A'), ('b','B'), ('c','C'), ('d','D'))
 class Question(models.Model):
     question_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     category = models.CharField(max_length=50, null=True, blank=True)
@@ -76,6 +76,16 @@ class Question(models.Model):
 
     class Meta:
         db_table = 'question'
+
+
+class Test(models.Model):
+    test_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+    result = models.IntegerField(null=True,blank=True)
+    date_appeared = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'test'
 
 
 RATING = (('Bad','Bad'),('Average','Average'),('Good','Good'),('Excellent','Excellent'))
