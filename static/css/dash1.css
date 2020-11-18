@@ -1,4 +1,4 @@
-/* @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600); */
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
 .grid-container {
   display: grid;
@@ -32,6 +32,8 @@
 .header {
   grid-area: header;
   background-color: #fefeff;
+  font-family: 'Work Sans';
+  font-weight: 500;
 }
 
 .sidenav {
@@ -547,6 +549,7 @@ margin: 13px;
 }
 label {
   font-family: Georgia, "Times New Roman", Times, serif;
+  
   font-size: 32px;
   color: #e9feff;
   height: 28px;
@@ -557,6 +560,7 @@ label {
   clear: both;
   float:left;
   margin-right:15px;
+  font-variant: simplified;
 }
 input {
   height: 49px;
