@@ -1,3 +1,5 @@
+/* @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600); */
+
 .grid-container {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -30,7 +32,7 @@
 
   .header {
     grid-area: header;
-    background-color: #648ca6;
+    background-color: #fefeff;
   }
   
   .sidenav {
@@ -65,12 +67,19 @@
   }
 
   
-  .header, .footer {
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background-color: #648ca6;
+    background-color: #fff;
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: #343a40;
   }
 
   .sidenav {
@@ -127,6 +136,26 @@
     box-shadow: 0 4px 8px 0 rgb(4 118 92 / 44%);
     transition: 2.3s;
     border-radius: 19px;
+   font-weight: 600;
+   font-variant: small-caps;
+
+  }
+  .overviewcard1 {
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    padding: 20px;
+    background-color: #d3d3;
+    font-size: larger;
+    box-shadow: 0 4px 8px 0 rgb(4 118 92 / 44%);
+    transition: 2.3s;
+    border-radius: 19px;
+   
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+   font-family: cursive;
+
   }
 
   .main-cards {
@@ -137,23 +166,43 @@
   
   .card {
     display: flex;
-    flex-direction: column;
+   
+    /* justify-content: center; */
+  flex-direction: column;/* importanttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt*/
+    align-items: center;
+    width: 100%;
+    background-color: #82bef6;
+    margin-bottom: 20px;
+    -webkit-column-break-inside: avoid;
+    padding: 35px;
+    /* box-sizing: border-box; */
+    box-shadow: 0 4px 8px 0 rgb(4 118 92 / 44%);
+    transition: 2.3s;
+    border-radius: 19px;
+  }
+  .card1 {
+    display: flex;
+    flex-direction: inherit; 
+    justify-content: center;
+  flex-direction: row;/* importanttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt*/
     align-items: center;
     width: 100%;
     background-color: #82bef6;
     margin-bottom: 20px;
     -webkit-column-break-inside: avoid;
     padding: 24px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     box-shadow: 0 4px 8px 0 rgb(4 118 92 / 44%);
     transition: 2.3s;
     border-radius: 19px;
   }
+  
+  
 
   /* Force varying heights to simulate dynamic content */
-  .card:first-child {
+  /* .card:first-child {
     height: 485px;
-  }
+  } */
 
   .card:nth-child(2) {
     height: 200px;
@@ -204,11 +253,12 @@
     }
   }
 
-  /* Medium-sized screen breakpoint (tablet, 1050px) */
+  Medium-sized screen breakpoint (tablet, 1050px)
   @media only screen and (min-width: 65.625em) {
     /* Break out main cards into two columns */
     .main-cards {
-      /* column-count: 2; */
+   
+      column-count: 2;
     }
   }
 
@@ -244,7 +294,7 @@
     overflow-y: auto;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
     z-index: 2; /* Needs to sit above the hamburger menu icon */
-    background-color: #394263;
+    background-color: #343a40;
     transform: translateX(-245px);
     transition: all .6s ease-in-out;
   }
@@ -290,6 +340,33 @@ p{
     margin-bottom: 40px;
 }
 
+.paragraph{
+  padding: 10px;
+}
+.titles{
+ font-family: sans-serif;
+color: white;
+font-size: large;
+margin: auto;
+}
+.card1-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* padding: 10px; */
+  font-variant: small-caps;
+  
+}
+/* .myInput{
+  float: right;
+  padding-left: 5px;
+} */
+.uservalues{
+  padding: 10px;
+  font-size: 30px;
+  float: right;
+  
+}
 
 h1{
     text-align: left;
@@ -298,7 +375,7 @@ h1{
 }
 
 hr{
-    width: 50%;
+    width: 100%;
     border: 0.5px solid black;
 }
 
@@ -350,7 +427,23 @@ input[type="submit"]:hover
     background: #39dc79;
     color: #000;
 }
-.button {
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  /* box-sizing: border-box; */
+  border: none;
+  border-bottom: 2px solid #09537c;
+  background: no-repeat;
+  
+  font-variant: small-caps;
+}
+input[type=text]:focus {
+  background-color: lightblue;
+  border: 3px  rgb(17, 193, 247);
+}
+.button4 {
   background-color: rgb(53, 184, 224); 
   color: #ffff;
   font-weight: 600; 
@@ -358,17 +451,93 @@ input[type="submit"]:hover
   padding: 16px 32px;
   text-align: initial;
   text-decoration: none;
-  display: inline-block;
+  
   font-size: 20px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
   display: block;
   width: -webkit-fill-available;
-  height: 82px;
+  
+}
+.button1 {
+  background-color: rgb(53, 184, 224); 
+  color: #ffff;
+  font-weight: 600; 
+  border: 2px solid #008CBA;
+  padding: 16px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  display: block;
+  margin: 41px 125px;
+  
 }
 .button:hover {
   background-color: #2bb8e7;
   color: rgba(1, 77, 148, 0.884);
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.button1:hover {
+  background-color: #2bb8e7;
+  color: rgba(1, 77, 148, 0.884);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.row{
+  margin: 13px;
+}
+
+#form {
+    
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0px;
+    text-align:center;
+}
+label {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    color: #333;
+    height: 20px;
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+input {
+    /* height: 20px; */
+    width: 300px;
+    /* border: 1px solid #000; */
+    margin-top: 10px;
+    float: left;
+}
+.button5 {
+    /* height: 20px; */
+  background-color: rgb(53, 184, 224); 
+  color: #ffff;
+  font-weight: 600; 
+  border: 2px solid #008CBA;
+  padding: 16px 32px;
+  text-align: initial;
+  text-decoration: none;
+  
+  font-size: 20px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  display: block;
+  width: -webkit-fill-available;
+    width: 300px;
+    /* border: 1px solid #000; */
+    margin-top: 10px;
+    float: left;
 }
