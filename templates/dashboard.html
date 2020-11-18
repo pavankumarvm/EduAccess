@@ -31,10 +31,10 @@
         <button class="button4" onclick="myFunction2()">Past Tests</button>
       </li>
       <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction22()">Change Password</button>
+        <button class="button4" onclick="myFunction22()">Change Username</button>
       </li>
       <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction33()">Change Username</button>
+        <button class="button4" onclick="myFunction33()">Change Password</button>
       </li>
       <li class="sidenav__list-item">
         <button class="button4" onclick="myFunction3()">About Us</button>
@@ -169,7 +169,63 @@
         <div class="col-md-8">
           <div class="card mb-3">
             <div class="card1-body">
+              <a class="anchorr" href="/results">Past Tests</a>
+              
+            </div>
+          </div>
+        </div>
 
+      </div>
+
+    </div>
+
+  </main>
+  <main class="main5">
+
+    <div class="main-cards">
+      <div class="card">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <div id="form">
+                <form name="registration" class="">
+
+                  <fieldset>
+                    <label for="username">Username:</label>
+                    <input class="myInput" value="username" name="username" id="username" readonly />
+      
+                    <button class="button5" onclick="" type="button"="regbutton">Update</button>
+                  </fieldset>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  <main class="main6">
+
+    <div class="main-cards">
+      <div class="card">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <div id="form">
+                <form name="registration" class="">
+
+                  <fieldset>
+                    <label for="Password">Password:</label>
+                    <input class="myInput" value="*********" name="Password" id="Password" readonly />
+      
+                    <button class="button5" onclick="" type="button">Update</button>
+                  </fieldset>
+                </form>
+
+              </div>
             </div>
           </div>
         </div>
@@ -203,7 +259,7 @@
     <div class="main-cards">
       <div class="card">
         <h6 class="titles" class="mb-0">If you like our work, then please share your feedback.</h6>
-        <button class="button1" onclick="">Feedback Us</button>
+        <a class="anchorr" href="/feedback">Feedback Us</a>
       </div>
       <!-- <div class="card">Card</div>
             <div class="card">Card</div> -->
@@ -221,6 +277,8 @@
 <script>
   function myFunction() {
     document.getElementById("header").innerHTML = "<span class='header__search'>Your Personal Details</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
     document.getElementsByClassName("main2")[0].style.display = 'none';
     document.getElementsByClassName("main3")[0].style.display = 'none';
     document.getElementsByClassName("main4")[0].style.display = 'none';
@@ -229,6 +287,8 @@
   }
   function myFunction1() {
     document.getElementById("header").innerHTML = "<span class='header__search'>Your Academic Details</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
     document.getElementsByClassName("main1")[0].style.display = 'none';
     document.getElementsByClassName("main4")[0].style.display = 'none';
     document.getElementsByClassName("main3")[0].style.display = 'none';
@@ -236,6 +296,8 @@
   }
   function myFunction2() {
     document.getElementById("header").innerHTML = "<span class='header__search'>Past Test Results</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
     document.getElementsByClassName("main1")[0].style.display = 'none';
     document.getElementsByClassName("main4")[0].style.display = 'none';
     document.getElementsByClassName("main2")[0].style.display = 'none';
@@ -243,10 +305,30 @@
   }
   function myFunction3() {
     document.getElementById("header").innerHTML = "<span class='header__search'>About Us</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
     document.getElementsByClassName("main1")[0].style.display = 'none';
     document.getElementsByClassName("main3")[0].style.display = 'none';
     document.getElementsByClassName("main2")[0].style.display = 'none';
     document.getElementsByClassName("main4")[0].style.display = 'block';
+  }
+  function myFunction22() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Change Username</span>";
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main5")[0].style.display = 'block';
+  }
+  function myFunction33() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Change Password</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'block';
   }
   function academicfunction(button) {
     var x = document.getElementsByClassName('myInput77');
