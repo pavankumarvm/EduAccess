@@ -42,10 +42,23 @@ class Stream(models.Model):
     stream_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     college_id = models.ForeignKey(College, on_delete=models.CASCADE, related_name="streams")
     stream_name = models.CharField(max_length=20, blank=False, null=False)
+    main_stream = models.CharField(max_length=20, blank=False, null=False)
     cut_off = models.DecimalField(decimal_places=2, max_digits=4)
 
     class Meta:
         db_table = 'stream'
+
+
+class Application(models.Model):
+    application_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    college = models.ForeignKey(College, on_delete=models.CASCADE, null=True)
+    stream_name = models.CharField(max_length=20, blank=True, null=True)
+    date_applied = models.DateField(auto_now_add=True)
+    accepted = models.BooleanField(default=False, null=True)
+
+    class Meta:
+        db_table = 'application'
 
 
 STD = (('10th', '10th'), ('12th', '12th'))

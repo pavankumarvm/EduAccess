@@ -1,4 +1,4 @@
-.seekcollege{
+.addstream{
     margin-top: 60px;
     padding: 30px 100px;
 }
@@ -6,19 +6,19 @@
 p{
     text-align: center;
     font-weight: 600;
-    font-size: 50px;
-    margin-bottom: 20px;
+    font-size: 45px;
+    margin-bottom: 15px;
 }
 
 
 h1{
     text-align: left;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 h1 span{
     display: block;
-    font-size: 25px;
+    font-size: 22px;
     padding: 0px 50px;
 }
 
@@ -28,23 +28,20 @@ hr{
 
 form{
     width: 100%;
-    height: 250px;
+    height: 300px;
     padding: 25px;
     display: grid;
     justify-items: center;
     align-items: center;
+    list-style-type: none;
 }
 
-#stream, #degree, #cut_off{
+.stream, #cut_off{
     width:320px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
     margin: 0px 10px;
-}
-
-label{
-    font-size:20px;
 }
 
 #cut_off{
@@ -65,37 +62,28 @@ label{
     box-shadow: 3px 3px 3px green;
 }
 
-.search_results{
-    min-height: 100px;
-    padding: 20px 100px;
+.form-element{
+    margin:auto;
+    margin-bottom: 15px;
+    width:75%;
+    display: grid;
+    grid-auto-flow:column;
+    grid-template-columns: 35% auto;
 }
 
-.noresults{
-    font-size: 30px;
-    font-weight: 700;
-    text-align: center;
-    align-content: center;
+.form-element>label{
+    font-size: 20px;
+    font-weight: bold;
+    align-self: center;
 }
 
-.table{
-    width: 100%;
-    margin: 10px auto;
-    border: 1px solid grey;
+.form-element>span{
+    font-size: 20px;
+    align-self: center;
 }
-
-.thead>tr{
-    background-color: lightgreen;
-}
-
-th, td {
-    text-align: left;
-    padding: 16px;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.applied{
-    color:green
+.others{
+    width:320px;
+    margin:10px;
+    height:40px;
+    font-size: 20px;
 }

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view_students.css' %}" />
+    <title>View Students</title>
+{% endblock head %}
+{% block body %}
+    <div class="viewstudents">
+        <h1>View Students</h1>
+        <div class="intro">
+            Hii {{ user.username }},<br>
+            <span>
+                Here you can view all the possible applications by students that came for your various courses in your college.
+            </span>
+        </div>
+        {% if not applications %}
+            <div class="noapplications">
+                Students yet have to apply for yor college.
+            </div>
+        {% else %}
+            <div class="applications">
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th>Stream</th>
+                            <th>Student Name</th>
+                            <th>Aptitude Result</th>
+                            <th>Tenth Percentage</th>
+                            <th>Twelth Percentage</th>
+                            <th>View Profile</th>
+                            <th>Status</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        {% for student in applications %}
+                            <tr class="stream" id="{{ student.application_id }}">
+                                <td>{{ student.stream_name }}</td>
+                                <td>{{ student.full_name }}</td>
+                                <td>{{ student.result }}</td>
+                                <td>{{ student.tenth_per }}</td>
+                                <td>{{ student.twelth_per }}</td>
+                                <td><a href="#">View Profile</a></td>
+                                {% if not student.accepted %}
+                                <td>Not Seen Yet</td>    
+                                {% else %}
+                                <td class="accepted">Accepted</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock body %}

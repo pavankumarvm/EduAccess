@@ -4,17 +4,17 @@ import os
 from datetime import datetime, timezone
 from eduaccess.settings import BASE_DIR
 
-
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.shortcuts import redirect
+from django.urls import reverse
 
 from accounts.models import EduUser
-from .models import Student, Subject, Question,Feedback, Test
+from .models import Student, Subject, Question, Feedback, Test, College, Stream, Application
 from .serializers import StudentSerializer, SubjectSerializer, QuestionSerializer
-from .serializers import TestSerializer
+from .serializers import TestSerializer, CollegeSerializer, StreamSerializer, ApplicationSerializer
 from accounts.serializers import EduUserSerializer
 # from .forms import StuForm  
 
@@ -24,26 +24,77 @@ class HomePageView(TemplateView):
 
 class SeekCollegeView(TemplateView):
 	template_name = 'seekcollege.html'
-	# college_list = []
-	
+
 	# GET method
-	# def get(request):
-	# 	pass
-	
+	def get(self, request):
+		queryset = Stream.objects.all()
+		streams = []
+		for query in queryset:
+			serializer = StreamSerializer(query)
+			stream = serializer.data
+			streams.append(stream['stream_name'])
+		streams = set(streams)
+		# print(streams)
+		data = {
+			'streams' : streams,
+		}
+		if request.method =="POST":
+			return streams
+		return render(request, template_name="seekcollege.html", context=data)
+
 	# POST method
-	def post(request):
+	def post(self,request):
+		user = request.user
+		student = Student.objects.get(user=user)
 		stream = request.POST.get('stream')
 		degree = request.POST.get('degree')
 		cut_off = request.POST.get('cut_off')
+		if cut_off == '':
+			cut_off = 100
 
-		college_list = []
-		sql_query = """
-				SELECT C.college_id, C.college_name, C.college_city, S.stream_id, S.stream_name, S.cut_off
-				FROM stream as S, college as C 
-				WHERE C.college_id = S.college_id and S.cut_off <= """ + cut_off + ';'
-		for i in Stream.objects.raw(sql_query):
-			print(i)
+		stream_list = []
+		queryset = Stream.objects.filter(main_stream=stream, stream_name=degree)
+		for query in queryset:
+			serializer = StreamSerializer(query)
+			stream_list.append({**serializer.data})
+		# print(stream_list)
+		colleges = []
+		for stream in stream_list:
+			if float(stream['cut_off']) <= int(cut_off):
+				college_obj = College.objects.get(college_id = stream['college_id'])
+				college = CollegeSerializer(college_obj)
+				college = {**college.data, **stream}
+				applied = Application.objects.filter(student=student, college=college_obj, stream_name=degree)
+				# print(applied)
+				college['applied'] = bool(applied)
+				colleges.append(college)
+		# print(colleges)
+		data = {
+			'colleges' : colleges,
+		}
+		data['streams'] = self.get(request)
+		return render(request, template_name='seekcollege.html', context=data)
 
+
+def addQuestions():
+	path = os.path.join(BASE_DIR , 'questions.xlsx')
+	# print(path)
+	df = pd.read_excel(path)
+	# print(df)
+	for i in range(len(df)):
+		row = df.loc[i,:]
+		# print(row)
+		_, created = Question.objects.get_or_create(
+				category= row['category'],
+				question= row['question'],
+				option_A= row['option_A'],
+				option_B= row['option_B'],
+				option_C= row['option_C'],
+				option_D= row['option_D'],
+				answer= row['answer'],
+				explanation= row['explanation'],
+			)
+	
 
 class AptitudeTestView(TemplateView):
 	template_name = 'test.html'
@@ -283,7 +334,163 @@ class StudentProfileView(TemplateView):
 			subject_id = request.POST.get('subject_id')
 			subject = Subject.objects.get(subject_id=subject_id)
 			subject.delete()
-		
+
+
+class CollegeProfileView(TemplateView):
+	# In this view manage get and post for college_dashboard.html
+	template_name = 'college_dashboard.html'
+
+	# GET method
+	def get(self, request, username):
+		user = EduUser.objects.get(username=username)
+		data = {
+			'created' : True
+		}
+		if user.is_college_admin:
+			college,created = College.objects.get_or_create(user=user)
+			serializer = CollegeSerializer(college)
+			data['college'] = {**serializer.data}
+			streams = []
+			if created == False:
+				queryset = Stream.objects.filter(college_id=college.college_id)
+				for query in queryset:
+					serializer = StreamSerializer(query)
+					streams.append({**serializer.data})
+				data['streams'] = streams
+				data['created'] = False
+			return render(request, 'college_dashboard.html', data)
+		else:
+			return redirect('/dashboard/' + user.username)
+
+	# POST method
+	def post(self, request,username):
+		college_name = request.POST.get('college_name')
+		college_city = request.POST.get('college_city')
+		college_address = request.POST.get('college_address')
+		user = request.user
+		college = College.objects.get(user=user)
+		college.college_name = college_name
+		college.college_address = college_address
+		college.college_city = college_city
+		college.save()
+		messages.success(request, 'College Details Updated Successfully.')
+		return redirect('/college/' + username)
+
+
+class QuestionView(TemplateView):
+	# this view is for question page
+	# on which college admin can suggest questions
+	template_name="questions.html"
+
+	def post(self, request):
+		category = request.POST.get('category')
+		category = str(category).lower()
+		question = request.POST.get('question')
+		option_A = request.POST.get('option_A')
+		option_B = request.POST.get('option_B')
+		option_C = request.POST.get('option_C')
+		option_D = request.POST.get('option_D')
+		answer = request.POST.get('answer')
+		answer = str(answer).lower()
+		explanation = request.POST.get('explanation')
+		user = request.user
+
+		question_obj = Question.objects.create(
+					category=category,
+					question=question,
+					option_A=option_A,
+					option_B=option_B,
+					option_C=option_C,
+					option_D=option_D,
+					answer=answer,
+					explanation=explanation,
+					given_by= user,
+					)
+		question_obj.save()
+		messages.success(request, "Question added successfully.")
+		return render(request, template_name = 'questions.html')
+
+
+class AddStreamView(TemplateView):
+	template_name = "addstream.html"
+
+	# GET method
+	def get(self, request):
+		queryset = Stream.objects.all()
+		streams = []
+		for query in queryset:
+			serializer = StreamSerializer(query)
+			stream = serializer.data
+			streams.append(stream['stream_name'])
+		streams = set(streams)
+		data = {
+			'streams' : streams,
+		}
+		return render(request, template_name="addstream.html", context=data)
+
+	def post(self, request):
+		user = request.user
+		college = College.objects.get(user=user)
+		main_stream = request.POST.get('main_stream')
+		stream = request.POST.get('stream')
+		if stream == "others":
+			stream = request.POST.get('others')
+		cut_off = request.POST.get('cut_off')
+		stream_obj,created = Stream.objects.get_or_create(
+			college_id=college,
+			main_stream=main_stream,
+			stream_name=stream,
+			cut_off=cut_off,
+		)
+		stream_obj.save()
+		messages.success(request, "Stream added Successfully.")
+		return redirect('/college/' + user.username + '/')
+
+
+class ApplicationsView(TemplateView):
+	template_name = "view_students.html"
+
+	# GET method
+	def get(self, request):
+		user = request.user
+		college = College.objects.get(user=user)
+		queryset = Application.objects.filter(college=college)
+		applications = []
+		for query in queryset:
+			serializer = ApplicationSerializer(query)
+			application = {**serializer.data}
+			student = Student.objects.get(student_id=application['student'])
+			serializer = StudentSerializer(student)
+			application = {**application, **serializer.data}
+			tests = Test.objects.filter(student_id=application['student'])
+			results = [0]
+			for test_obj in tests:
+				test = TestSerializer(test_obj)
+				print(test.data)
+				results.append(test.data['result'])
+			application['result'] = max(results)
+			applications.append(application)
+		print(applications)
+		data = {
+			'applications' : applications
+		}
+		return render(request, template_name='view_students.html', context=data)
+
+	# POST method
+	def post(self,request):
+		pass
+
+def apply(request,stream, id):
+	user = request.user
+	student = Student.objects.get(user=user)
+	college = College.objects.get(college_id=id)
+	_, created = Application.objects.get_or_create(
+			student = student,
+			college = college,
+			stream_name=stream
+		)
+	messages.success(request, "Application submitted")
+	return redirect('/seekcollege/')
 
 def feedbackView(request):
 	if request.method == 'POST':
@@ -298,23 +505,3 @@ def feedbackView(request):
 			messages.success(request, 'Successfully submitted')   
 	return render(request, template_name = 'feedback.html')    
 
-
-def addQuestions():
-	path = os.path.join(BASE_DIR , 'questions.xlsx')
-	# print(path)
-	df = pd.read_excel(path)
-	# print(df)
-	for i in range(len(df)):
-		row = df.loc[i,:]
-		# print(row)
-		_, created = Question.objects.get_or_create(
-				category= row['category'],
-				question= row['question'],
-				option_A= row['option_A'],
-				option_B= row['option_B'],
-				option_C= row['option_C'],
-				option_D= row['option_D'],
-				answer= row['answer'],
-				explanation= row['explanation'],
-			)
-	

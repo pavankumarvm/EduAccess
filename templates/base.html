@@ -30,22 +30,17 @@
 					{% if user.is_active %}
 						{% if user.is_college_admin %}
 							<li class="nav-item">
-								<a class="nav-link" href="/stream/">Stream Details</a>
+								<a class="nav-link" href="/suggest_question/">Suggest Question</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/college/">College Details</a>
+								<a class="nav-link" href="/add_stream/">Add Stream</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/manageclg/">Manage College Details</a>
+								<a class="nav-link" href="/view_students/">View Students</a>
 							</li>
+							
 							<li class="nav-item">
-								<a class="nav-link" href="/create-test/">Create Test</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/training/">Training Data</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/viewstudents/">View Students</a>
+								<a class="nav-link" href="/college/{{ user.username }}/">College Details</a>
 							</li>
 						{% else %}
 							<li class="nav-item">
@@ -68,10 +63,10 @@
 							</a>
 	
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-								style="background-color: rgb(117 131 255)">
+								style="background-color: gray; color:white">
 								<a class="dropdown-item" href="/accounts/logout/">Logout</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="/feedback/">Feedback Us</a>
+								<a class="dropdown-item" href="/feedback/">Feedback</a>
 							</div>
 						</li>
 					{% else %}

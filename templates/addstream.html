@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addstream.css' %}" />
+    <title>Add Stream</title>
+{% endblock head %}
+
+{% block body %}
+    <div class="addstream">
+        <p>Add Stream Here</p>
+        <h1>Hii {{user.username}},
+            <span>Here, you add various streams which are available to students in your college and their respective cut-off.
+            </span>
+        </h1>
+        <hr> 
+        <form method="POST">
+            {% csrf_token %}
+            <li class="form-element">
+                <label for="stream">Main Stream:</label>
+                <select class="stream" name="main_stream">
+                    <option value="">--Select Required 12<super>th</super> Stream--</option>
+                    <option value="Science">Science</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Arts">Arts</option>
+                </select>
+            </li>
+            <li class="form-element">
+                <label for="degree">Stream/Degree:</label>
+                <select class="stream" name="stream">
+                    <option value="">--Select Stream--</option>
+                    {% for stream in streams %}
+                        <option value="{{stream}}">{{stream}}</option>
+                    {% endfor %}
+                    <option value="others">Others</option>
+                </select>
+            </li>
+            <li class="form-element">
+                <span for="others" class="label-others">If not mentioned, Type here.</span>
+                <input type="text" name="others" class="others">
+            </li>
+            <li class="form-element">    
+                <label  for="Cut-off">Cut-off</label>
+                <input type="number" name="cut_off" id="cut_off">
+            </li>
+            <br>
+            <input type="submit" name="submit" value="Submit" class="submit">
+        </form>
+    </div>
+    <hr>
+{% endblock body %}

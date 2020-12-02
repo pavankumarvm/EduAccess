@@ -1,0 +1,139 @@
+.college_dashboard{
+    margin-top:60px;
+}
+
+h1{
+    margin-top: 10px;
+    text-align: center;
+    padding: 0px 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+.intro{
+    text-align: left;
+    font-size: 35px;
+    padding: 10px;
+    padding-bottom: 20px;
+    margin: 0px 7%;
+    border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+.intro span{
+    display: block;
+    font-size: 25px;
+    padding: 0px 50px;
+}
+
+.update{
+    position: absolute;
+    right: 15%;
+    width: 122px;
+    height: 45px;
+    font-size: 22px;
+    font-weight: 700;
+    color: green;
+    background-color: lightgreen;
+    border: 1px solid green;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px green;
+    padding: 5px 20px;
+    margin-top: 25px;
+}
+
+.detail-form{
+    display: grid;
+    padding: 10px 8%;
+    align-items: center;
+    margin: 20px auto;
+    width: 70%;
+    box-sizing: content-box;
+    border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+.input-section{
+    display: grid;
+    grid-auto-flow: row;
+    align-items: center;
+    width: 100%;
+    padding: 0px 15%;
+}
+
+.input-section>label{
+    font-size: 22px;
+    font-weight: 600;
+    height: auto;
+    align-content: center;
+    padding: 15px;
+}
+
+.input_box{
+    padding: 5px 15px;
+    width: auto;
+    border: none;
+    background-color: #eee;
+    width: 65%;
+    float:right;
+}
+
+.submit-section{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 45% 45%;
+    gap: 10%;
+    align-items: center;
+    width: 80%;
+    padding: 0px 15%;
+    margin:15px auto;
+}
+
+.submit{
+    font-size: 22px;
+    font-weight: 700;
+    color: green;
+    background-color: lightgreen;
+    border: 1px solid green;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px green;
+    padding: 5px 20px;
+}
+
+.cancel{
+    font-size: 22px;
+    font-weight: 700;
+    color: red;
+    background-color: rgb(253, 139, 158);
+    border: 1px solid red;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px red;
+    padding: 5px 20px;
+}
+
+.hide{
+    display: none;
+}
+
+.streams{
+    display: grid;
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.table{
+    width: 60%;
+    margin: 10px auto;
+    border: 1px solid grey;
+}
+
+.thead>tr{
+    background-color: lightgreen;
+}
+
+th, td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

@@ -53,7 +53,7 @@ def login_user(request):
             login(request, user)
             messages.success(request, 'Logged in successfully.')
             if user.is_college_admin:
-                return redirect('/')
+                return redirect('/college/' + username + '/')
             else:
                 return redirect('/dashboard/' + username + '/')
         else:
@@ -66,11 +66,13 @@ def login_user(request):
                     template_name='login.html',
                 )
 
+
 def logout_user(request):
     logout(request)
     messages.success(request, 'Logged out successfully.')
     return redirect('/')
-    
+
+
 def random_otp():
     random_str = ""
     for i in range(6):
@@ -79,6 +81,7 @@ def random_otp():
         else:
             random_str += str(random.randrange(0,9,1))
     return random_str
+
 
 def forgot_password(request):
     if request.method == 'POST':

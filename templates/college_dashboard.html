@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/college_dashboard.css' %}" />
+    <title>College Dashboard</title>
+{% endblock head %}
+{% block body %}
+    <div class="college_dashboard">
+        <h1>College Details</h1>
+        <div class="intro">
+            Hii {{ user.first_name }},
+            <span>
+                Here please enter apppropriate college details which will be available for students to view.
+            </span>
+        </div>
+        <button type="button" id="update" class="update" onclick="showSubmit()">Update</button>
+        <form method="POST" class="detail-form">
+            {% csrf_token %}
+            <div class="input-section">
+                <label for="college_name">
+                    College Name:
+                    <input type="text" maxlength="100" name="college_name" class="input_box" placeholder="Enter College Name" value="{{ college.college_name }}" required/>
+                </label>
+                <label for="college_address">
+                    College Address:
+                    <input maxlength="100" name="college_address" class="input_box" placeholder="Enter College Address" value="{{ college.college_address }}" required />
+                </label>
+                <label for="college_city">
+                    College City:
+                    <input type="text" maxlength="25" name="college_city" class="input_box" placeholder="Enter College City" value="{{ college.college_city }}"required/>
+                </label>
+            </div>
+            <div class="submit-section">
+                <button id="cancel" type="button" class="cancel hide" onclick="showUpdate()">Cancel</button>
+                <button id="submit" type="submit" class="submit hide">Update Details</button>
+            </div>
+        </form>
+        <div class="streams">
+            <h1>Streams</h1>
+            <table class="table">
+                <thead class="thead">
+                    <tr>
+                        <th>Main Stream</th>
+                        <th>Stream/Degree</th>
+                        <th>Cut Off</th>
+                    </tr>    
+                </thead>
+                <tbody>
+                    {% for stream in streams %}
+                    <tr class="stream">
+                        <td>{{ stream.stream_name }}</td>
+                        <td>{{ stream.main_stream }}</td>
+                        <td>{{ stream.cut_off }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var submitbutton = document.getElementById('submit');
+        var cancelbutton = document.getElementById('cancel');
+        var updatebutton = document.getElementById('update');
+        var input_box = document.getElementsByClassName('input_box');
+
+        function showSubmit(){
+            submitbutton.classList.remove('hide');
+            cancelbutton.classList.remove('hide');
+            updatebutton.classList.add('hide');
+        }
+
+        function showUpdate(){
+            submitbutton.classList.add('hide');
+            cancelbutton.classList.add('hide');
+            updatebutton.classList.remove('hide');
+        }
+    </script>
+{% endblock body %}
