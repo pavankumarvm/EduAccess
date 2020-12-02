@@ -1,302 +1,386 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard1.css' %}">
-    <title>DashBoard</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/dash1.css' %}">
+<title>DashBoard</title>
 {% endblock head %}
 {% block body %}
-	
+
 <div class="grid-container">
-        
-	<!-- <div class="menu-icon">
-		<i class="fas fa-bars"></i>
-	  </div> -->
+  <!-- <div class="menu-icon">
+            <i class="fas fa-bars"></i>
+          </div> -->
+  <header id="header" class="header">
+    <div class="header__search">Your Personal Details</div>
 
-	<header class="header">
-		<div class="header__search">Your Academic Details</div>
-		<!-- <div class="header__avatar">Your face</div> -->
-	</header>
-	
-	<aside class="sidenav">
-	  
-		<div class="sidenav__close-icon">
-			<i class="fas fa-times"></i>
-		</div>
-		<p class="para">Dashboard</p>
-		<ul class="sidenav__list">
-			<li class="sidenav__list-item"  >
-			  <button class="button" onclick="myFunction()">Personal Details</button> 
-			  </li>
-			<li class="sidenav__list-item">
-			  <button class="button" onclick="myFunction1()">Academic Details</button> 
-			</li> 
-			<li class="sidenav__list-item">
-			  <button class="button" onclick="myFunction2()">Contact Us</button> 
-			</li>
-			<li class="sidenav__list-item">
-			  <button class="button" onclick="myFunction3()">About Us</button> 
-			</li>
-			<li class="sidenav__list-item"></li>
-		  </ul>
-		  
-	</aside>
-	
-	<main class="main1">
-		<div class="main-header">
-			<div class="main-header__heading">Hello Personal</div>
-			<!-- <div class="main-header__updates">Recent Items</div> -->
-		  </div>
+    <!-- <div class="header__avatar">Your face</div> -->
+  </header>
+  <aside class="sidenav">
+    <div class="sidenav__close-icon">
+      <i class="fas fa-times"></i>
+    </div>
+    <p class="para">Dashboard</p>
+    <ul class="sidenav__list">
+      <li class="sidenav__list-item">
+        <button class="button4" onclick="myFunction()">Personal Details</button>
+      </li>
+      <li class="sidenav__list-item">
+        <button class="button4" onclick="myFunction1()">Academic Details</button>
+      </li>
+      <li class="sidenav__list-item">
+        <button class="button4" onclick="myFunction2()">Past Tests</button>
+      </li>
+      <li class="sidenav__list-item">
+        <button class="button4" onclick="myFunction22()">Change Username</button>
+      </li>
+      <li class="sidenav__list-item">
+        <button class="button4" onclick="myFunction33()">Change Password</button>
+      </li>
+      <li class="sidenav__list-item">
+        <button class="button4" onclick="myFunction3()">About Us</button>
+      </li>
+      <li class="sidenav__list-item"></li>
+    </ul>
+  </aside>
+  <main class="main1">
+    <div class="main-header">
+      <div class="main-header__heading">Hello, {{user.username}}</div>
+      <!-- <div class="main-header__updates">Recent Items</div> -->
+    </div>
+    <div class="main-cards">
+      <div class="card1">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <div id="form">
+                <form name="registration" class="">
 
-		  <div class="main-overview">
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Tenth Board:</div>
-			  <div class="overviewcard__info">Brd</div>
-			</div>
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Tenth Percentage:</div>
-			  <div class="overviewcard__info">Per</div>
-			</div>
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Twelth Board:</div>
-			  <div class="overviewcard__info">Brd</div>
-			</div>
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Twelth Percentage:</div>
-			  <div class="overviewcard__info">Per</div>
-			</div>
-		  </div>
+                  <fieldset>
+                    <label for="Student">First Name:</label>
+                    <input class="myInput" value="First Name" name="Student" id="Student" readonly />
+                    <label for="Student1">Last Name:</label>
+                    <input class="myInput" value="Last Name" name="Student1" id="Student1" readonly />
+                    <label for="Student2">Email:</label>
+                    <input class="myInput" value="email@gmail.com" name="Student2" id="Student2" readonly />
+                    <label for="Student3">Gender:</label>
+                    <input class="myInput" value="gender" name="Student3" id="Student3" readonly />
+                    <label for="Student4">Age:</label>
+                    <input class="myInput" value="21" name="Student4" id="Student4" readonly />
+                    <label for="Student5">DOB:</label>
+                    <input class="myInput" value="d/m/y" name="Student5" id="Student5" readonly />
+                    <button class="button5" onclick="personalfunction(this);" type="button"="regbutton">Update</button>
+                  </fieldset>
+                </form>
 
-		  <div class="main-cards">
-			<div class="card">
-			  <p>Stream Details</p>
-<hr> 
-<form>
-	<select id="Stream" name="Stream">
-	   <option value="">--Select Main Stream--</option>
-	  <option value="Science">Science</option>
-	 <option value="Commerce">Commerce</option>
-	 <option value="Arts">Arts</option>
-	</select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="card">Card</div>
+                <div class="card">Card</div> -->
+    </div>
+    <script>
 
-	<select id="Degree" name="Degree">
-		<option value="">--Select Stream--</option>
-		<option value="BE">BE</option>
-		 <option value="BCOM">BCOM</option>
-	 <option value="BBA">BBA</option>
-	 <option value="BFM">BFM</option>
-	 <option value="BMS">BMS</option>
-	 <option value="MCOM">MCOM</option>
-   </select>
-   <br>
-   <label  for="Cut-off">Cut-off</label>
-	<input type="number" name="Cut-off" id="Cut-off">
-	<br>
-	<input type="submit" name="submit" value="Submit">
- </form>
-			  </div>
-			<!-- <div class="card">Card</div>
-			<div class="card">Card</div> -->
-		  </div>
+    </script>
+  </main>
+  <main class="main2">
+    <div class="main-overview">
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Tenth Board:</div>
+        <div class="overviewcard__info">Brd</div>
+      </div>
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Tenth Percentage:</div>
+        <div class="overviewcard__info">Per</div>
+      </div>
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Twelth Board:</div>
+        <div class="overviewcard__info">Brd</div>
+      </div>
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Twelth Percentage:</div>
+        <div class="overviewcard__info">Per</div>
+      </div>
+    </div>
 
-	</main>
-	<main class="main2">
-		<div class="main-header">
-			<div class="main-header__heading">Hello Academic</div>
-			<!-- <div class="main-header__updates">Recent Items</div> -->
-		  </div>
+    <div class="main-cards">
+      <div class="card1">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <div id="form">
+                <form name="registration" class="">
 
-		  <div class="main-overview">
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Tenth Board:</div>
-			  <div class="overviewcard__info">Brd</div>
-			</div>
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Tenth Percentage:</div>
-			  <div class="overviewcard__info">Per</div>
-			</div>
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Twelth Board:</div>
-			  <div class="overviewcard__info">Brd</div>
-			</div>
-			<div class="overviewcard">
-			  <div class="overviewcard__icon">Twelth Percentage:</div>
-			  <div class="overviewcard__info">Per</div>
-			</div>
-		  </div>
+                  <fieldset>
+                    <label for="Clg">College Name:</label>
+                    <input class="myInput77" value="College Name" name="Clg" id="Clg" readonly />
 
-		  <div class="main-cards">
-			<div class="card">
-			  <p>Stream Details</p>
-<hr> 
-<form>
-	<select id="Stream" name="Stream">
-	   <option value="">--Select Main Stream--</option>
-	  <option value="Science">Science</option>
-	 <option value="Commerce">Commerce</option>
-	 <option value="Arts">Arts</option>
-	</select>
+                    <label for="stream">Stream:</label>
+                    <input class="myInput77" value="stream" name="stream" id="stream" readonly />
 
-	<select id="Degree" name="Degree">
-		<option value="">--Select Stream--</option>
-		<option value="BE">BE</option>
-		 <option value="BCOM">BCOM</option>
-	 <option value="BBA">BBA</option>
-	 <option value="BFM">BFM</option>
-	 <option value="BMS">BMS</option>
-	 <option value="MCOM">MCOM</option>
-   </select>
-   <br>
-   <label  for="Cut-off">Cut-off</label>
-	<input type="number" name="Cut-off" id="Cut-off">
-	<br>
-	<input type="submit" name="submit" value="Submit">
- </form>
-			  </div>
-			<!-- <div class="card">Card</div>
-			<div class="card">Card</div> -->
-		  </div>
+                    <label for="cutoff">Cut Off:</label>
+                    <input class="myInput77" value="Cut Off" name="cutoff" id="cutoff" readonly />
 
-	</main>
+                    <label for="standard">Standard:</label>
+                    <input class="myInput77" value="Standard" name="standard" id="standard" readonly />
+                    <button class="button5" onclick="academicfunction(this);" type="button">Update</button>
 
-	<main class="main3">
-	  <div class="main-header">
-		  <div class="main-header__heading">Hello Contact</div>
-		  <!-- <div class="main-header__updates">Recent Items</div> -->
-		</div>
+                  </fieldset>
 
-		<div class="main-overview">
-		  <div class="overviewcard">
-			<div class="overviewcard__icon">Tenth Board:</div>
-			<div class="overviewcard__info">Brd</div>
-		  </div>
-		  <div class="overviewcard">
-			<div class="overviewcard__icon">Tenth Percentage:</div>
-			<div class="overviewcard__info">Per</div>
-		  </div>
-		  <div class="overviewcard">
-			<div class="overviewcard__icon">Twelth Board:</div>
-			<div class="overviewcard__info">Brd</div>
-		  </div>
-		  <div class="overviewcard">
-			<div class="overviewcard__icon">Twelth Percentage:</div>
-			<div class="overviewcard__info">Per</div>
-		  </div>
-		</div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-cards">
+        <div class="card1">
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card1-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="titles" class="mb-0">Subjects</h6>
+                  </div>
+                  <div id="toremove" class="myP" class="col-sm-9 text-secondary">
+                    <input class="myInput" type="text" name="" value="Subject1" readonly />
+                    <input class="myInput" type="text" name="" value="Subject2" readonly />
+                    <input class="myInput" type="text" name="" value="Subject3" readonly />
+                    <input class="myInput" type="text" name="" value="Subject4" readonly />
+                    <input class="myInput" type="text" name="" value="Subject5" readonly />
+                    <span id="addedsubject"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="button1" onclick="addInput()">Add Subjects</button>
+        </div>
 
-		<div class="main-cards">
-		  <div class="card">
-			<p>Stream Details</p>
-<hr> 
-<form>
-  <select id="Stream" name="Stream">
-	 <option value="">--Select Main Stream--</option>
-	<option value="Science">Science</option>
-   <option value="Commerce">Commerce</option>
-   <option value="Arts">Arts</option>
-  </select>
+      </div>
 
-  	<select id="Degree" name="Degree">
-		<option value="">--Select Stream--</option>
-		<option value="BE">BE</option>
-		<option value="BCOM">BCOM</option>
-		<option value="BBA">BBA</option>
-		<option value="BFM">BFM</option>
-		<option value="BMS">BMS</option>
-		<option value="MCOM">MCOM</option>
- 	</select>
- <br>
- <label  for="Cut-off">Cut-off</label>
-  <input type="number" name="Cut-off" id="Cut-off">
-  <br>
-  <input type="submit" name="submit" value="Submit">
-</form>
-			</div>
-		  <!-- <div class="card">Card</div>
-		  <div class="card">Card</div> -->
-		</div>
+  </main>
+
+  <main class="main3">
+
+    <div class="main-cards">
+      <div class="card">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <a class="anchorr" href="/results">Past Tests</a>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  <main class="main5">
+
+    <div class="main-cards">
+      <div class="card">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <div id="form">
+                <form name="registration" class="">
+
+                  <fieldset>
+                    <label for="username">Username:</label>
+                    <input class="myInput" value="username" name="username" id="username" readonly />
+      
+                    <button class="button5" onclick="" type="button"="regbutton">Update</button>
+                  </fieldset>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  <main class="main6">
+
+    <div class="main-cards">
+      <div class="card">
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card1-body">
+              <div id="form">
+                <form name="registration" class="">
+
+                  <fieldset>
+                    <label for="Password">Password:</label>
+                    <input class="myInput" value="*********" name="Password" id="Password" readonly />
+      
+                    <button class="button5" onclick="" type="button">Update</button>
+                  </fieldset>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
 
   </main>
   <main class="main4">
-	<div class="main-header">
-		<div class="main-header__heading">Hello About</div>
-		<!-- <div class="main-header__updates">Recent Items</div> -->
-	  </div>
+    <div class="main-header">
+      <div class="main-header__heading">Meet Our Team</div>
+      <!-- <div class="main-header__updates">Recent Items</div> -->
+    </div>
 
-	  <div class="main-overview">
-		<div class="overviewcard">
-		  <div class="overviewcard__icon">Tenth Board:</div>
-		  <div class="overviewcard__info">Brd</div>
-		</div>
-		<div class="overviewcard">
-		  <div class="overviewcard__icon">Tenth Percentage:</div>
-		  <div class="overviewcard__info">Per</div>
-		</div>
-		<div class="overviewcard">
-		  <div class="overviewcard__icon">Twelth Board:</div>
-		  <div class="overviewcard__info">Brd</div>
-		</div>
-		<div class="overviewcard">
-		  <div class="overviewcard__icon">Twelth Percentage:</div>
-		  <div class="overviewcard__info">Per</div>
-		</div>
-	  </div>
+    <div class="main-overview">
+      <div class="overviewcard1">
+        <div class="overviewcard__icon">Suryakant Kashyap</div>
+        <!-- <div class="overviewcard__info"></div> -->
+      </div>
+      <div class="overviewcard1">
+        <div class="overviewcard__icon">Pavankumar Maurya</div>
+        <!-- <div class="overviewcard__info"></div> -->
+      </div>
+      <div class="overviewcard1">
+        <div class="overviewcard__icon">Bhaskar Maheshwari</div>
+        <!-- <div class="overviewcard__info"></div> -->
+      </div>
+    </div>
 
-	  <div class="main-cards">
-		<div class="card">
-		  <p>Stream Details</p>
-<hr> 
-<form>
-<select id="Stream" name="Stream">
-	<option value="">--Select Main Stream--</option>
-	<option value="Science">Science</option>
-	<option value="Commerce">Commerce</option>
-	<option value="Arts">Arts</option>
-</select>
+    <div class="main-cards">
+      <div class="card">
+        <h6 class="titles" class="mb-0">If you like our work, then please share your feedback.</h6>
+        <a class="anchorr" href="/feedback">Feedback Us</a>
+      </div>
+      <!-- <div class="card">Card</div>
+            <div class="card">Card</div> -->
+    </div>
 
-<select id="Degree" name="Degree">
-	<option value="">--Select Stream--</option>
-	<option value="BE">BE</option>
-		<option value="BCOM">BCOM</option>
-		<option value="BBA">BBA</option>
-		<option value="BFM">BFM</option>
-		<option value="BMS">BMS</option>
-		<option value="MCOM">MCOM</option>
-	</select>
-	<br>
-	<label  for="Cut-off">Cut-off</label>
-	<input type="number" name="Cut-off" id="Cut-off">
-	<br>
-	<input type="submit" name="submit" value="Submit">
-	</form>
-		  </div>
-		<!-- <div class="card">Card</div>
-		<div class="card">Card</div> -->
-	  </div>
-	</main>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__copyright"></div>
+    <div class="footer__signature"></div>
+  </footer>
 </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script>
-	function myFunction(){
-	  document.getElementsByClassName("main2")[0].style.display='none';
-	  document.getElementsByClassName("main3")[0].style.display='none';
-	  document.getElementsByClassName("main4")[0].style.display='none';
-	  document.getElementsByClassName("main1")[0].style.display='block';
-	}
-	function myFunction1(){
-	  document.getElementsByClassName("main4")[0].style.display='none';
-	  document.getElementsByClassName("main3")[0].style.display='none';
-	  document.getElementsByClassName("main2")[0].style.display='block';
-	}
-	function myFunction2(){
-	  document.getElementsByClassName("main4")[0].style.display='none';
-	  document.getElementsByClassName("main2")[0].style.display='none';
-	  document.getElementsByClassName("main3")[0].style.display='block';
-	}
-	function myFunction3(){
-	  document.getElementsByClassName("main3")[0].style.display='none';
-	  document.getElementsByClassName("main2")[0].style.display='none';
-	  document.getElementsByClassName("main4")[0].style.display='block';
-	}
-  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  function myFunction() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Your Personal Details</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'block';
+
+  }
+  function myFunction1() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Your Academic Details</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'block';
+  }
+  function myFunction2() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Past Test Results</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'block';
+  }
+  function myFunction3() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>About Us</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main4")[0].style.display = 'block';
+  }
+  function myFunction22() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Change Username</span>";
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main5")[0].style.display = 'block';
+  }
+  function myFunction33() {
+    document.getElementById("header").innerHTML = "<span class='header__search'>Change Password</span>";
+    document.getElementsByClassName("main5")[0].style.display = 'none';
+    document.getElementsByClassName("main4")[0].style.display = 'none';
+    document.getElementsByClassName("main1")[0].style.display = 'none';
+    document.getElementsByClassName("main3")[0].style.display = 'none';
+    document.getElementsByClassName("main2")[0].style.display = 'none';
+    document.getElementsByClassName("main6")[0].style.display = 'block';
+  }
+  function academicfunction(button) {
+    var x = document.getElementsByClassName('myInput77');
+    var i;
+    console.log(x);
+    for (i = 0; i < x.length; i++) {
+      if (x[i].readOnly) {
+        console.log(x[i]);
+        console.log(true);
+        x[i].readOnly = false;
+        x[0].select();
+        button.innerHTML = "Save";
+
+      } else {
+        console.log(x[i]);
+        console.log(false);
+        x[i].readOnly = true;
+        button.innerHTML = "Update";
+
+      }
+    }
+  }
+
+  var countBox = 1;
+  var boxName = 0;
+  function addInput() {
+    var boxName = "Add Subject" + countBox;
+    document.getElementById('addedsubject').innerHTML += '<input type="text" id="' + boxName + '" value="' + boxName + '" "  />';
+    countBox += 1;
+    console.log(boxName);
+
+  }
+  function personalfunction(button) {
+    var x = document.getElementsByClassName('myInput');
+    var i;
+    for (i = 0; i < x.length; i++) {
+      if (x[i].readOnly) {
+        console.log(x[i]);
+        console.log(true);
+        x[i].readOnly = false;
+        x[i].select();
+        button.innerHTML = "Save";
+
+      } else {
+        console.log(x[i]);
+        console.log(false);
+        x[i].readOnly = true;
+        button.innerHTML = "Update";
+
+      }
+    }
+  }
+</script>
+
 {% endblock body %}
