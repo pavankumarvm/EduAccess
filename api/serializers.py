@@ -8,7 +8,7 @@ class StudentSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Student
-        fields = ['student_id', 'full_name', 'gender', 'birth_date', 'phone_no', 'tenth_per', 'tenth_brd' ,'twelth_brd', 'twelth_per', ]
+        fields = ['student_id', 'full_name', 'gender', 'birth_date', 'phone_no', 'tenth_per', 'tenth_brd' ,'twelth_brd', 'twelth_per', 'twelth_stream']
         read_only_fields = ['student_id', 'user']
 
     def create(self, validated_data):
@@ -82,7 +82,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Application
-        fields = ['application_id', 'student', 'college', 'stream_name', 'date_applied', 'accepted']
+        fields = ['application_id', 'student', 'college', 'stream_name', 'date_applied', 'accepted', 'accepted_by']
 
     def create(self, validated_data):
         return Application.objects.create(**validated_data)

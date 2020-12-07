@@ -52,10 +52,11 @@ class Stream(models.Model):
 class Application(models.Model):
     application_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
-    college = models.ForeignKey(College, on_delete=models.CASCADE, null=True)
+    college = models.ForeignKey(College, related_name='applied_to', on_delete=models.CASCADE, null=True)
     stream_name = models.CharField(max_length=20, blank=True, null=True)
     date_applied = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False, null=True)
+    accepted_by = models.OneToOneField(College, related_name='accepted_by', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         db_table = 'application'

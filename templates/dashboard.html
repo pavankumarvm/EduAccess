@@ -1,386 +1,329 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/dash1.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
 <title>DashBoard</title>
 {% endblock head %}
 {% block body %}
-
-<div class="grid-container">
-  <!-- <div class="menu-icon">
-            <i class="fas fa-bars"></i>
-          </div> -->
-  <header id="header" class="header">
-    <div class="header__search">Your Personal Details</div>
-
-    <!-- <div class="header__avatar">Your face</div> -->
-  </header>
-  <aside class="sidenav">
-    <div class="sidenav__close-icon">
-      <i class="fas fa-times"></i>
-    </div>
-    <p class="para">Dashboard</p>
-    <ul class="sidenav__list">
-      <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction()">Personal Details</button>
-      </li>
-      <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction1()">Academic Details</button>
-      </li>
-      <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction2()">Past Tests</button>
-      </li>
-      <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction22()">Change Username</button>
-      </li>
-      <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction33()">Change Password</button>
-      </li>
-      <li class="sidenav__list-item">
-        <button class="button4" onclick="myFunction3()">About Us</button>
-      </li>
-      <li class="sidenav__list-item"></li>
-    </ul>
-  </aside>
-  <main class="main1">
-    <div class="main-header">
-      <div class="main-header__heading">Hello, {{user.username}}</div>
-      <!-- <div class="main-header__updates">Recent Items</div> -->
-    </div>
-    <div class="main-cards">
-      <div class="card1">
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card1-body">
-              <div id="form">
-                <form name="registration" class="">
-
-                  <fieldset>
-                    <label for="Student">First Name:</label>
-                    <input class="myInput" value="First Name" name="Student" id="Student" readonly />
-                    <label for="Student1">Last Name:</label>
-                    <input class="myInput" value="Last Name" name="Student1" id="Student1" readonly />
-                    <label for="Student2">Email:</label>
-                    <input class="myInput" value="email@gmail.com" name="Student2" id="Student2" readonly />
-                    <label for="Student3">Gender:</label>
-                    <input class="myInput" value="gender" name="Student3" id="Student3" readonly />
-                    <label for="Student4">Age:</label>
-                    <input class="myInput" value="21" name="Student4" id="Student4" readonly />
-                    <label for="Student5">DOB:</label>
-                    <input class="myInput" value="d/m/y" name="Student5" id="Student5" readonly />
-                    <button class="button5" onclick="personalfunction(this);" type="button"="regbutton">Update</button>
-                  </fieldset>
-                </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="card">Card</div>
-                <div class="card">Card</div> -->
-    </div>
-    <script>
-
-    </script>
-  </main>
-  <main class="main2">
-    <div class="main-overview">
-      <div class="overviewcard">
-        <div class="overviewcard__icon">Tenth Board:</div>
-        <div class="overviewcard__info">Brd</div>
-      </div>
-      <div class="overviewcard">
-        <div class="overviewcard__icon">Tenth Percentage:</div>
-        <div class="overviewcard__info">Per</div>
-      </div>
-      <div class="overviewcard">
-        <div class="overviewcard__icon">Twelth Board:</div>
-        <div class="overviewcard__info">Brd</div>
-      </div>
-      <div class="overviewcard">
-        <div class="overviewcard__icon">Twelth Percentage:</div>
-        <div class="overviewcard__info">Per</div>
-      </div>
-    </div>
-
-    <div class="main-cards">
-      <div class="card1">
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card1-body">
-              <div id="form">
-                <form name="registration" class="">
-
-                  <fieldset>
-                    <label for="Clg">College Name:</label>
-                    <input class="myInput77" value="College Name" name="Clg" id="Clg" readonly />
-
-                    <label for="stream">Stream:</label>
-                    <input class="myInput77" value="stream" name="stream" id="stream" readonly />
-
-                    <label for="cutoff">Cut Off:</label>
-                    <input class="myInput77" value="Cut Off" name="cutoff" id="cutoff" readonly />
-
-                    <label for="standard">Standard:</label>
-                    <input class="myInput77" value="Standard" name="standard" id="standard" readonly />
-                    <button class="button5" onclick="academicfunction(this);" type="button">Update</button>
-
-                  </fieldset>
-
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="main-cards">
-        <div class="card1">
-          <div class="col-md-8">
-            <div class="card mb-3">
-              <div class="card1-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="titles" class="mb-0">Subjects</h6>
-                  </div>
-                  <div id="toremove" class="myP" class="col-sm-9 text-secondary">
-                    <input class="myInput" type="text" name="" value="Subject1" readonly />
-                    <input class="myInput" type="text" name="" value="Subject2" readonly />
-                    <input class="myInput" type="text" name="" value="Subject3" readonly />
-                    <input class="myInput" type="text" name="" value="Subject4" readonly />
-                    <input class="myInput" type="text" name="" value="Subject5" readonly />
-                    <span id="addedsubject"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button class="button1" onclick="addInput()">Add Subjects</button>
-        </div>
-
-      </div>
-
-  </main>
-
-  <main class="main3">
-
-    <div class="main-cards">
-      <div class="card">
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card1-body">
-              <a class="anchorr" href="/results">Past Tests</a>
-              
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-  <main class="main5">
-
-    <div class="main-cards">
-      <div class="card">
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card1-body">
-              <div id="form">
-                <form name="registration" class="">
-
-                  <fieldset>
-                    <label for="username">Username:</label>
-                    <input class="myInput" value="username" name="username" id="username" readonly />
-      
-                    <button class="button5" onclick="" type="button"="regbutton">Update</button>
-                  </fieldset>
-                </form>
-
-              </div>
-            </div>
-          </div>
-
-      </div>
-
-    </div>
-
-  </main>
-  <main class="main6">
-
-    <div class="main-cards">
-      <div class="card">
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card1-body">
-              <div id="form">
-                <form name="registration" class="">
-
-                  <fieldset>
-                    <label for="Password">Password:</label>
-                    <input class="myInput" value="*********" name="Password" id="Password" readonly />
-      
-                    <button class="button5" onclick="" type="button">Update</button>
-                  </fieldset>
-                </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-  <main class="main4">
-    <div class="main-header">
-      <div class="main-header__heading">Meet Our Team</div>
-      <!-- <div class="main-header__updates">Recent Items</div> -->
-    </div>
-
-    <div class="main-overview">
-      <div class="overviewcard1">
-        <div class="overviewcard__icon">Suryakant Kashyap</div>
-        <!-- <div class="overviewcard__info"></div> -->
-      </div>
-      <div class="overviewcard1">
-        <div class="overviewcard__icon">Pavankumar Maurya</div>
-        <!-- <div class="overviewcard__info"></div> -->
-      </div>
-      <div class="overviewcard1">
-        <div class="overviewcard__icon">Bhaskar Maheshwari</div>
-        <!-- <div class="overviewcard__info"></div> -->
-      </div>
-    </div>
-
-    <div class="main-cards">
-      <div class="card">
-        <h6 class="titles" class="mb-0">If you like our work, then please share your feedback.</h6>
-        <a class="anchorr" href="/feedback">Feedback Us</a>
-      </div>
-      <!-- <div class="card">Card</div>
-            <div class="card">Card</div> -->
-    </div>
-
-  </main>
-
-  <footer class="footer">
-    <div class="footer__copyright"></div>
-    <div class="footer__signature"></div>
-  </footer>
+<div class="dashboard">
+	<div class="side-panel">
+		<p class="title">Dashboard</p>
+		<div class="options" id="options-list">
+			<li class="option-item">
+				Personal Details
+			</li>
+			<li class="option-item">
+				Academic Details
+			</li>
+			<li class="option-item">
+				My Applications
+			</li>
+			<li class="option-item">
+				Change Username/Email
+			</li>
+			<li class="option-item">
+				Change Password
+			</li>
+			<li class="option-item">
+				About Us
+			</li>
+		</div>
+	</div>
+	<div class="content-page" id="content-page">
+		<div class="page">
+			<div class="personal">
+				<div class="header">Your Personal Details</div>
+				<div class="content">
+					<form method="POST">
+						{% csrf_token %}
+						<li class="form-element">
+							<label for="first_name">First Name:</label>
+							<input class="input_box" value="{{student.first_name}}" name="first_name" id="first_name" readonly />
+						</li>
+						<li class="form-element">
+							<label for="last_name">Last Name:</label>
+							<input class="input_box" value="{{student.last_name}}" name="last_name" id="last_name" readonly />
+						</li>
+						<li class="form-element">
+							<label for="full_name">Full Name:</label>
+							<input class="input_box" value="{{student.full_name}}" name="full_name" id="full_name" readonly />
+						</li>
+						<li class="form-element">
+							<label for="gender">Gender:</label>
+							<input class="input_box" value="{{student.gender}}" name="gender" id="gender" readonly />
+						</li>
+						<li class="form-element">
+							<label for="birth_date">DOB:</label>
+							<input type="date" class="input_box" value="{{student.birth_date}}" name="birth_date" id="birth_date" readonly />
+						</li>
+						<div class="submit-section">
+							<button type="button" id="update_personal" class="update" onclick="showSubmit()">Update Details</button>
+							<button type="submit" name="update_personal" id="submit_personal" class="submit hide" onclick="showUpdate()">Save Details</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="page hide">
+			<div class="academic">
+				<div class="header">Your Academic Details</div>
+				<div class="content">
+					<form method="POST">
+						{% csrf_token %}
+						<div class="overview">
+							<div class="tenth">
+								<div class="overviewcard">
+									<div class="board">Tenth Board:</div>
+									<select name="tenth_brd" class="input_box2" readonly>
+										<option value="{{ student.tenth_brd }}" selected>{{ student.tenth_brd }}</option>
+										<option value="SB">SB(State Board)</option>
+										<option value="CBSE">CBSE</option>
+										<option value="ICSE">ICSE</option>
+										<option vlaue="IB">IB(International Board)</option>
+									</select>
+								</div>
+								<div class="overviewcard">
+									<div class="percentage">Tenth Percentage:</div>
+									<input type="text" class="input_box2" name="tenth_per" value="{{ student.tenth_per }}" placholder="Enter" readonly />
+								</div>
+							</div>
+							<div class="twelth">
+								<div class="overviewcard">
+									<div class="board">Twelth Board:</div>
+									<select name="twelth_brd" class="input_box2" readonly>
+										<option value="{{ student.tenth_brd }}" selected>{{ student.tenth_brd }}</option>
+										<option value="SB">SB(State Board)</option>
+										<option value="CBSE">CBSE</option>
+										<option value="ICSE">ICSE</option>
+										<option vlaue="IB">IB(International Board)</option>
+									</select>
+								</div>
+								<div class="overviewcard">
+									<div class="percentage">Twelth Percentage:</div>
+									<input type="text" class="input_box2" name="twelth_per" value="{{ student.twelth_per }}" placholder="Enter" readonly />
+								</div>
+							</div>
+							<div class="stream">
+								<div class="twelth_stream">Twelth Stream</div>
+								<select id="stream" class="input_box2" name="twelth_stream" readonly>
+									<option value="{{ student.twelth_stream }}">{{ student.twelth_stream }}</option>
+									<option value="Science">Science</option>
+									<option value="Commerce">Commerce</option>
+									<option value="Arts">Arts</option>
+								</select>
+							</div>
+						</div>
+						<div class="submit-section">
+							<button type="button" id="update_academic" class="update" onclick="showSubmit1()">Update Academic Details</button>
+							<button type="submit" name="update_academic" id="submit_academic" class="submit hide"  onclick="showUpdate1()">Save Details</button>
+						</div>
+					</form>
+					<hr>
+					<div class="subject">
+						<h1>Subjects</h1>
+						<div class="add_subject">
+							<p class="add_subject">Add Subject</p>
+							<form method="POST">
+								{% csrf_token %}
+								<label for="std">Standard:</label>
+								<select name="std" required>
+									<option value="">----</option>
+									<option value="10th">10<super>th</super></option>
+									<option value="12th">12<super>th</super></option>
+								</select>
+								<label for="sub_name">Subject:</label>
+								<input class="input_sub" name="sub_name" id="sub_name" placeholder="Enter Subject"/>
+								<label for="marks">Marks:</label>
+								<input type="number" class="input_sub" name="marks" id="marks" placeholder="Enter Marks"/>
+								<button type="submit" name="add_subject">Add Subject</button>
+							</form>
+						</div>
+						<table class="table">
+							<thead class="thead">
+								<tr>
+									<th>Standard</th>
+									<th>Subject</th>
+									<th>Marks</th>
+									<th>Remove Subject</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for subject in subjects %}
+									<tr id="{{ subject.subject_id }}">
+										<td>{{subject.std}}</td>
+										<td>{{subject.sub_name}}</td>
+										<td>{{subject.marks}}</td>
+										<td>
+											<form method="POST">
+												{% csrf_token %}
+												<button type="submit" value="{{ subject.subject_id }}" name="remove_subject" class="remove">Remove</button>
+											</form>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="page hide">
+			<div class="applications">
+				<div class="header">My Applications</div>
+				<div class="content">
+					<table class="table">
+						<thead class="thead">
+							<tr>
+								<th>Date Applied</th>
+								<th>Stream</th>
+								<th>College Name</th>
+								<th>College City</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for application in applications%}
+								<tr id="{{ application.application_id }}">
+									<td> {{ application.date_applied }} </td>
+									<td> {{ application.stream_name }} </td>
+									<td> {{ application.college_name }} </td>
+									<td> {{ application.college_city }} </td>
+									<td>
+										{% if application.status %}
+											Accepted
+										{% else %}
+											Not accepted
+										{% endif %}
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="page hide">
+			<div class="content">
+				<div class="change_username">
+					<h1>Update username</h1>
+					<form method="POST">
+						{% csrf_token %}
+						  <label for="username">Username:</label>
+						  <input class="input_box edit" value="{{user.username}}" name="new_username" id="username"/>
+						  <button type="submit" name="update_username" class="submit">Update Username</button>
+					</form>
+				</div>
+				<div class="change_email">
+					<h1>Update Email</h1>
+					<form method="POST">
+						{% csrf_token %}
+						  <label for="email">Old Email Id:</label>
+						  <input class="input_box edit" value="{{user.email}}" name="email" id="email" readonly/>
+						  <label for="new_email">New Email Id:</label>
+						  <input type="email" class="input_box edit" placeholder="Enter Email" name="new_email" id="new_email" required/>
+						  <button type="submit" name="update_email" class="submit">Update Email</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="page hide">
+			<div class="change_password">
+				<h1>Change Password</h1>
+				<form method="POST">
+					{% csrf_token %}
+					  <label for="old_password">Old Password:</label>
+					  <input type="password" class="input_box edit" name="old_password" id="old_password"/>
+					  <label for="new_password">New Password:</label>
+					  <input type="password" class="input_box edit" name="new_password" id="new_password"/>
+					  <label for="confirm_password">Confirm New Password:</label>
+					  <input type="password" class="input_box edit" name="confirm_password" id="confirm_password"/>
+					  <button type="submit" name="change_password" class="submit">Change Password</button>
+				</form>
+			</div>
+		</div>
+		<div class="page hide">
+			<div class="header">
+				<div class="heading">Meet Our Team</div>
+			</div>
+			<div class="content">
+				<div class="team">
+					<div class="member">
+						Pavankumar Maurya
+					</div>
+					<div class="member">
+						Suryakant Kashyap
+					</div>
+					<div class="member">
+						Bhaskar Maheshwari
+					</div>
+				</div>
+				<div class="feedback">
+					<h6 class="feedback-info">If you like our work, then please share your feedback.</h6>
+					<a class="anchor" href="/feedback/">Feedback Us</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-  function myFunction() {
-    document.getElementById("header").innerHTML = "<span class='header__search'>Your Personal Details</span>";
-    document.getElementsByClassName("main5")[0].style.display = 'none';
-    document.getElementsByClassName("main6")[0].style.display = 'none';
-    document.getElementsByClassName("main2")[0].style.display = 'none';
-    document.getElementsByClassName("main3")[0].style.display = 'none';
-    document.getElementsByClassName("main4")[0].style.display = 'none';
-    document.getElementsByClassName("main1")[0].style.display = 'block';
+	var options = document.getElementById('options-list');
+	var pages = document.getElementById('content-page');
+	var previous_page = 0;
+	for(let i=0; i<options.children.length; i++){
+		(function(index){
+			options.children[i].onclick = function(){
+				if(previous_page != i){
+					pages.children[previous_page].classList.add('hide');
+					pages.children[i].classList.remove('hide');
+					previous_page = i;
+				}
+			}    
+		})(i); 
+	}
 
-  }
-  function myFunction1() {
-    document.getElementById("header").innerHTML = "<span class='header__search'>Your Academic Details</span>";
-    document.getElementsByClassName("main5")[0].style.display = 'none';
-    document.getElementsByClassName("main6")[0].style.display = 'none';
-    document.getElementsByClassName("main1")[0].style.display = 'none';
-    document.getElementsByClassName("main4")[0].style.display = 'none';
-    document.getElementsByClassName("main3")[0].style.display = 'none';
-    document.getElementsByClassName("main2")[0].style.display = 'block';
-  }
-  function myFunction2() {
-    document.getElementById("header").innerHTML = "<span class='header__search'>Past Test Results</span>";
-    document.getElementsByClassName("main5")[0].style.display = 'none';
-    document.getElementsByClassName("main6")[0].style.display = 'none';
-    document.getElementsByClassName("main1")[0].style.display = 'none';
-    document.getElementsByClassName("main4")[0].style.display = 'none';
-    document.getElementsByClassName("main2")[0].style.display = 'none';
-    document.getElementsByClassName("main3")[0].style.display = 'block';
-  }
-  function myFunction3() {
-    document.getElementById("header").innerHTML = "<span class='header__search'>About Us</span>";
-    document.getElementsByClassName("main5")[0].style.display = 'none';
-    document.getElementsByClassName("main6")[0].style.display = 'none';
-    document.getElementsByClassName("main1")[0].style.display = 'none';
-    document.getElementsByClassName("main3")[0].style.display = 'none';
-    document.getElementsByClassName("main2")[0].style.display = 'none';
-    document.getElementsByClassName("main4")[0].style.display = 'block';
-  }
-  function myFunction22() {
-    document.getElementById("header").innerHTML = "<span class='header__search'>Change Username</span>";
-    document.getElementsByClassName("main4")[0].style.display = 'none';
-    document.getElementsByClassName("main6")[0].style.display = 'none';
-    document.getElementsByClassName("main1")[0].style.display = 'none';
-    document.getElementsByClassName("main3")[0].style.display = 'none';
-    document.getElementsByClassName("main2")[0].style.display = 'none';
-    document.getElementsByClassName("main5")[0].style.display = 'block';
-  }
-  function myFunction33() {
-    document.getElementById("header").innerHTML = "<span class='header__search'>Change Password</span>";
-    document.getElementsByClassName("main5")[0].style.display = 'none';
-    document.getElementsByClassName("main4")[0].style.display = 'none';
-    document.getElementsByClassName("main1")[0].style.display = 'none';
-    document.getElementsByClassName("main3")[0].style.display = 'none';
-    document.getElementsByClassName("main2")[0].style.display = 'none';
-    document.getElementsByClassName("main6")[0].style.display = 'block';
-  }
-  function academicfunction(button) {
-    var x = document.getElementsByClassName('myInput77');
-    var i;
-    console.log(x);
-    for (i = 0; i < x.length; i++) {
-      if (x[i].readOnly) {
-        console.log(x[i]);
-        console.log(true);
-        x[i].readOnly = false;
-        x[0].select();
-        button.innerHTML = "Save";
+	
+	var submitbutton = document.getElementById('submit_personal');
+	var updatebutton = document.getElementById('update_personal');
+	var input_boxes = document.getElementsByClassName('input_box');
 
-      } else {
-        console.log(x[i]);
-        console.log(false);
-        x[i].readOnly = true;
-        button.innerHTML = "Update";
+	function showSubmit(){
+		submitbutton.classList.remove('hide');
+		updatebutton.classList.add('hide');
+		for(let i=0; i<input_boxes.length; i++){
+			input_boxes[i].readOnly = false;
+			input_boxes[i].classList.add('edit');
+		}
+	}
 
-      }
-    }
-  }
+	function showUpdate(){
+		submitbutton.classList.add('hide');
+		updatebutton.classList.remove('hide');
+		for(let i=0; i<input_boxes.length; i++){
+			input_boxes[i].readOnly = true;
+			input_boxes[i].classList.remove('edit');
+		}
+	}
 
-  var countBox = 1;
-  var boxName = 0;
-  function addInput() {
-    var boxName = "Add Subject" + countBox;
-    document.getElementById('addedsubject').innerHTML += '<input type="text" id="' + boxName + '" value="' + boxName + '" "  />';
-    countBox += 1;
-    console.log(boxName);
+	var submitbutton1 = document.getElementById('submit_academic');
+	var updatebutton1 = document.getElementById('update_academic');
+	var input_boxes1 = document.getElementsByClassName('input_box2');
 
-  }
-  function personalfunction(button) {
-    var x = document.getElementsByClassName('myInput');
-    var i;
-    for (i = 0; i < x.length; i++) {
-      if (x[i].readOnly) {
-        console.log(x[i]);
-        console.log(true);
-        x[i].readOnly = false;
-        x[i].select();
-        button.innerHTML = "Save";
+	function showSubmit1(){
+		submitbutton1.classList.remove('hide');
+		updatebutton1.classList.add('hide');
+		for(let i=0; i<input_boxes.length; i++){
+			input_boxes1[i].readOnly = false;
+			input_boxes1[i].classList.add('edit');
+		}
+	}
 
-      } else {
-        console.log(x[i]);
-        console.log(false);
-        x[i].readOnly = true;
-        button.innerHTML = "Update";
-
-      }
-    }
-  }
+	function showUpdate1(){
+		submitbutton1.classList.add('hide');
+		updatebutton1.classList.remove('hide');
+		for(let i=0; i<input_boxes.length; i++){
+			input_boxes1[i].readOnly = true;
+			input_boxes1[i].classList.remove('edit');
+		}
+	}
 </script>
-
 {% endblock body %}

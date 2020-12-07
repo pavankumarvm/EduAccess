@@ -27,7 +27,7 @@
                             <th>Aptitude Result</th>
                             <th>Tenth Percentage</th>
                             <th>Twelth Percentage</th>
-                            <th>View Profile</th>
+                            <!-- <th>View Profile</th> -->
                             <th>Status</th>
                         </tr>    
                     </thead>
@@ -39,9 +39,14 @@
                                 <td>{{ student.result }}</td>
                                 <td>{{ student.tenth_per }}</td>
                                 <td>{{ student.twelth_per }}</td>
-                                <td><a href="#">View Profile</a></td>
+                                <!-- <td><a href="#">View Profile</a></td> -->
                                 {% if not student.accepted %}
-                                <td>Not Seen Yet</td>    
+                                <td>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" value="{{ student.application_id }}" name="application_id" class="accept"><a>Accept</a></button>
+                                    </form>
+                                </td>
                                 {% else %}
                                 <td class="accepted">Accepted</td>
                                 {% endif %}

@@ -3,7 +3,7 @@ from django.contrib.admin import ModelAdmin
 
 # Register your models here.
 from .models import Student, Subject, College, Question, Stream
-from .models import Feedback, Test
+from .models import Feedback, Test, Application
 
 class StudentAdmin(ModelAdmin):
 
@@ -38,4 +38,5 @@ admin.site.register(Student, StudentAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Test)
+admin.site.register(Application)
 admin.site.register(Feedback)

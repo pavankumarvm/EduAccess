@@ -1,0 +1,343 @@
+.dashboard{
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 22% auto;
+    width: 100%;
+    padding-bottom: 50px;
+    height: 90vh;
+    overflow-y: hidden;
+}
+
+.side-panel{
+    display: grid;
+    grid-auto-flow: row;
+    background-color: #394263;
+    width: 100%;
+    height: 94vh;
+    padding: 25px;
+    align-items: baseline;
+}
+
+.title{
+    padding: 0px 15px;
+    font-size: 35px;
+    color:white;
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+    border-bottom: 1px solid white;
+}
+
+.options{
+    display: grid;
+    align-items: baseline;
+    grid-auto-flow: row;
+    list-style-type: none;
+}
+
+.option-item{
+    padding: 5px;
+    font-size: 22px;
+    text-align: left;
+    min-height: 50px;
+    color: white;
+    cursor: pointer;
+}
+
+.option-item:hover {
+  background-color: #82bef6;
+  cursor: pointer;
+  color: black;
+}
+
+.option-active{
+  background-color: #82bef6;
+  color: black;  
+}
+
+.content-page{
+    display: grid;
+    padding: 30px 70px;
+    overflow-y: scroll;
+    min-height: 90vh;
+    margin-bottom: 50px;
+}
+
+.page{
+    min-height:95vh;
+}
+
+.header{
+    width:100%;
+    font-size:32px;
+    text-align:center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid grey;
+}
+
+.content{
+    padding: 20px;
+    display: grid;
+}
+
+.content>form{
+    display: grid;
+    grid-auto-flow: row;
+}
+
+.form-element{
+    display: grid;
+    grid-template-columns: 20% auto; 
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.input_box{
+    font-size: 22px;
+    padding: 5px 15px;
+    border:none;
+}
+
+.submit-section{
+    display:grid;
+    padding: 20px;
+    width: 100%;
+    margin: 10px auto;
+    align-content: center;
+    justify-items:center;
+}
+
+.update{
+    width: 50%;
+    height: 45px;
+    font-size: 22px;
+    font-weight: 700;
+    color: green;
+    background-color: lightgreen;
+    border: 1px solid green;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px green;
+    padding: 5px 20px;
+    margin-top: 25px;
+}
+
+.submit{
+    width: 50%;
+    height: 45px;
+    font-size: 22px;
+    background-color: rgb(53, 184, 224); 
+    color: #ffff;
+    font-weight: 600; 
+    border: 2px solid #008CBA;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px #008CBA;
+    padding: 5px 20px;
+    margin-top: 25px;
+}
+
+.overview{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 35% 35% 30%;
+    height: 240px;
+    padding: 20px;
+    align-content: center;
+}
+
+.tenth, .twelth{
+    display: grid;
+    grid-auto-flow: column;
+    border-bottom: 1px solid #eee;
+}
+
+.overviewcard{
+    padding: 5px 20px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 50% 50%;
+}
+
+.board,.percentage{
+    display: grid;
+    font-size: 20px;
+    font-weight: 600;
+    align-content: center;
+    text-align: center;
+}
+
+.input_box2{
+    padding: 5px 10px;
+    margin: 10px;
+    border: none;
+}
+
+.stream{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 50% 50%;
+    width: 70%;
+    margin: 10px 15%;
+    font-size: 20px;
+    font-weight: 600;
+    align-content: center;
+    text-align: center;
+}
+
+.twelth_stream{
+    display: grid;
+    align-content: center;
+}
+#stream{
+    min-height: 40px;
+}
+
+.subject{
+    display: grid;
+    align-content: center;
+}
+
+.subject>h1{
+   text-align: center;
+    border-top: 1px solid black;
+}
+
+.add_subject{
+    display: grid;
+    grid-auto-flow: row;
+}
+
+.add_subject> form{
+    display: grid;
+    grid-auto-flow: column;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bbb;
+}
+.add_subject > p{
+    font-size: 22px;
+    text-decoration:underline;
+}
+.add_subject>form>label{
+    display: grid;
+    font-weight: 600;
+    align-content: center;
+    text-align: center;
+}
+
+.input_sub{
+    width: 150px;
+    padding: 5px 12px;
+    font-size: 18px;
+    height: 40px;
+}
+
+.applications{
+    padding:50px 100px;
+    width:100%;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+}
+
+.change_username>form,
+.change_password >form,
+.change_email>form{
+    display: grid;
+    padding: 10px 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #aaa;
+}
+
+.change_email>form>label,
+.change_password>form>label,
+.change_username>form>label{
+    font-size: 18px;
+    padding: 10px;
+}
+
+.team{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 20px;
+    padding: 25px;
+}
+
+.member{
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600px;
+    background-color: #e50000c9;
+    font-size: larger;
+    box-shadow: 0 4px 8px 0 rgb(4 118 92 / 44%);
+    transition: 2.3s;
+    border-radius: 8px;
+    font-weight: 600;
+    color: white;
+    font-variant: small-caps;
+}
+
+.feedback{
+    text-align: center;
+    font-size: 25px;
+}
+
+.feedback-info{
+    font-size: 25px;
+}
+
+.anchor{
+    background-color: rgb(53, 184, 224); 
+    color: #ffff;
+    font-weight: 600; 
+    border: 2px solid #008CBA;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    display: block;
+    text-decoration: none  !important;
+    width: 50%;
+    margin: 20px auto;
+}    
+
+
+.hide{
+    display: none;
+}
+
+.edit{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.table{
+    width: 60%;
+    margin: 10px auto;
+    border: 1px solid grey;
+}
+
+.thead>tr{
+    background-color: lightgreen;
+}
+
+th, td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.remove{
+    border:none;
+    background: none;
+    color: red;
+    text-decoration: underline;
+    font-size: 16px;
+}

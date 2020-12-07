@@ -203,16 +203,34 @@ class StudentProfileView(TemplateView):
 				subjects.append({**serializer.data})
 			# print(subjects)
 
-			user['subjects'] = subjects
-			# print(user)
+			student = Student.objects.get(user=User)
+			queryset = Application.objects.filter(student=student)
+			applications = []
+			for application in queryset:
+				serializer = ApplicationSerializer(application)
+				application = {**serializer.data}
+				college = College.objects.get(college_id=application['college'])
+				application['college_name'] = college.college_name
+				application['college_city'] = college.college_city
+				if application['accepted'] == True and application['accepted_by'] == college.college_id:
+					application['status'] = True
+				else:
+					application['status'] = False
+				applications.append(application)
 
-			return render(request, 'dashboard.html', context=user)
+			data = {
+				'student' :user,
+				'subjects' : subjects,
+				'applications': applications,
+			}
+
+			return render(request, 'dashboard.html', context=data)
 		else:
 			messages.error("You have not logged in.")
 			return redirect('/accounts/login/')
 	
 	# POST method
-	def post(self,request):
+	def post(self,request, username):
 		if 'update_username' in request.POST:
 			# Using this form
 			# User can update username
@@ -253,7 +271,7 @@ class StudentProfileView(TemplateView):
 			user = request.user
 			old_password = request.POST.get('old_password')
 			new_password = request.POST.get('new_password')
-			confirm_password = request.POSt.get('confirm_password')
+			confirm_password = request.POST.get('confirm_password')
 			user = EduUser.objects.get(user_id = user.user_id)
 			user.authenticate(username=user.username, password=old_password)
 			if user is not None:
@@ -269,14 +287,13 @@ class StudentProfileView(TemplateView):
 		elif 'update_personal' in request.POST:
 			# Using this form
 			# User can update personal details
-
 			user = request.user
 			first_name = request.POST.get('first_name')
 			last_name = request.POST.get('last_name')
 			full_name = request.POST.get('full_name')
 			gender = request.POST.get('gender')
 			birth_date = request.POST.get('birth_date')
-			phone_no = request.POSt.get('phone_no')
+			phone_no = request.POST.get('phone_no')
 			
 			user.first_name = first_name
 			user.last_name = last_name
@@ -293,7 +310,7 @@ class StudentProfileView(TemplateView):
 		elif 'update_academic' in request.POST:
 			# Using this form
 			# Student can update his/her acdemic details
-
+			print(request.POST)
 			tenth_brd = request.POST.get('tenth_brd')
 			tenth_per = request.POST.get('tenth_per')
 			twelth_brd = request.POST.get('twelth_brd')
@@ -320,7 +337,7 @@ class StudentProfileView(TemplateView):
 
 			student = Student.objects.get(user=user)
 			subject, created = Subject.objects.get_or_create(
-				student_id= student.student_id,
+				student_id= student,
 				std = std,
 				sub_name= sub_name,
 			)
@@ -330,10 +347,10 @@ class StudentProfileView(TemplateView):
 		elif 'remove_subject' in request.POST:
 			# Using this form
 			# Student can remove the subjects
-
-			subject_id = request.POST.get('subject_id')
+			subject_id = request.POST.get('remove_subject')
 			subject = Subject.objects.get(subject_id=subject_id)
 			subject.delete()
+		return redirect('/dashboard/' + username)
 
 
 class CollegeProfileView(TemplateView):
@@ -478,7 +495,19 @@ class ApplicationsView(TemplateView):
 
 	# POST method
 	def post(self,request):
-		pass
+		application_id = request.POST.get('application_id')
+		application = Application.objects.get(application_id=application_id)
+		college = College.objects.get(college_id = application.college)
+		application.accepted_by = college
+		application.save()
+		student = Student.objects.get(student_id=application.student_id)
+		queryset = Application.objects.filter(student=student)
+		for application in queryset:
+			application.accepted = True
+			application.accepted_by = college
+			application.save()
+		return redirect('/view_students/')
+
 
 def apply(request,stream, id):
 	user = request.user
@@ -491,6 +520,7 @@ def apply(request,stream, id):
 		)
 	messages.success(request, "Application submitted")
 	return redirect('/seekcollege/')
+
 
 def feedbackView(request):
 	if request.method == 'POST':

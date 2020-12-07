@@ -19,15 +19,15 @@
             <div class="input-section">
                 <label for="college_name">
                     College Name:
-                    <input type="text" maxlength="100" name="college_name" class="input_box" placeholder="Enter College Name" value="{{ college.college_name }}" required/>
+                    <input type="text" maxlength="100" name="college_name" class="input_box" placeholder="Enter College Name" value="{{ college.college_name }}" required readonly/>
                 </label>
                 <label for="college_address">
                     College Address:
-                    <input maxlength="100" name="college_address" class="input_box" placeholder="Enter College Address" value="{{ college.college_address }}" required />
+                    <input maxlength="100" name="college_address" class="input_box" placeholder="Enter College Address" value="{{ college.college_address }}" required readonly/>
                 </label>
                 <label for="college_city">
                     College City:
-                    <input type="text" maxlength="25" name="college_city" class="input_box" placeholder="Enter College City" value="{{ college.college_city }}"required/>
+                    <input type="text" maxlength="25" name="college_city" class="input_box" placeholder="Enter College City" value="{{ college.college_city }}"required readonly/>
                 </label>
             </div>
             <div class="submit-section">
@@ -61,18 +61,24 @@
         var submitbutton = document.getElementById('submit');
         var cancelbutton = document.getElementById('cancel');
         var updatebutton = document.getElementById('update');
-        var input_box = document.getElementsByClassName('input_box');
+        var input_boxes = document.getElementsByClassName('input_box');
 
         function showSubmit(){
             submitbutton.classList.remove('hide');
             cancelbutton.classList.remove('hide');
             updatebutton.classList.add('hide');
+            for(let i=0; i<input_boxes.length; i++){
+                input_boxes[i].readOnly = false;
+            }
         }
 
         function showUpdate(){
             submitbutton.classList.add('hide');
             cancelbutton.classList.add('hide');
             updatebutton.classList.remove('hide');
+            for(let i=0; i<input_boxes.length; i++){
+                input_boxes[i].readOnly = true;
+            }
         }
     </script>
 {% endblock body %}
