@@ -54,6 +54,20 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="view_profile hide">
+                    <div class="profile">
+                        <p>Full Name: {{ student.full_name }}</p>
+                        <p>Date of Birth: {{ student.birth_date }}</p>
+                        <p>Gender: {{ student.gender }}</p>
+                        <p>Tenth Board: {{ student.tenth_brd }}</p>
+                        <p>Tenth Percentage: {{ student.tenth_per }}</p>
+                        <p>Twelth Stream: {{ student.twelth_stream }}</p>
+                        <p>Twelth Board: {{ student.twelth_brd }}</p>
+                        <p>Twelth Percentage: {{ student.twelth_per }}</p>
+                        <p>Applied for: {{ student.stream_name }}</p>
+                        <p>Aptitude Test Score: {{ student.result }}</p>
+                    </div>
+                </div>
             </div>
         {% endif %}
     </div>

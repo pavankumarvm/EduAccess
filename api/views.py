@@ -16,7 +16,6 @@ from .models import Student, Subject, Question, Feedback, Test, College, Stream,
 from .serializers import StudentSerializer, SubjectSerializer, QuestionSerializer
 from .serializers import TestSerializer, CollegeSerializer, StreamSerializer, ApplicationSerializer
 from accounts.serializers import EduUserSerializer
-# from .forms import StuForm  
 
 class HomePageView(TemplateView):
 	template_name = 'home.html'
@@ -483,11 +482,11 @@ class ApplicationsView(TemplateView):
 			results = [0]
 			for test_obj in tests:
 				test = TestSerializer(test_obj)
-				print(test.data)
+				# print(test.data)
 				results.append(test.data['result'])
 			application['result'] = max(results)
 			applications.append(application)
-		print(applications)
+		# print(applications)
 		data = {
 			'applications' : applications
 		}
@@ -497,7 +496,7 @@ class ApplicationsView(TemplateView):
 	def post(self,request):
 		application_id = request.POST.get('application_id')
 		application = Application.objects.get(application_id=application_id)
-		college = College.objects.get(college_id = application.college)
+		college = application.college
 		application.accepted_by = college
 		application.save()
 		student = Student.objects.get(student_id=application.student_id)

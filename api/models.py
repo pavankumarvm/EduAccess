@@ -56,7 +56,7 @@ class Application(models.Model):
     stream_name = models.CharField(max_length=20, blank=True, null=True)
     date_applied = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False, null=True)
-    accepted_by = models.OneToOneField(College, related_name='accepted_by', on_delete=models.SET_NULL, null=True)
+    accepted_by = models.ForeignKey(College, related_name='accepted_by', on_delete=models.SET_NULL, null=True)
 
     class Meta:
         db_table = 'application'
@@ -95,7 +95,7 @@ class Question(models.Model):
 class Test(models.Model):
     test_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    result = models.IntegerField(null=True,blank=True)
+    result = models.IntegerField(null=False, blank=False, default=0)
     date_appeared = models.DateTimeField(auto_now_add=True)
 
     class Meta:
