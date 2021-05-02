@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+
+body {
+  font-size: 20px;
+  font-family: "Work Sans", sans-serif;
+}
+
 .dashboard {
   margin-top: 60px;
   display: grid;
@@ -235,7 +242,7 @@
 }
 
 .applications {
-  padding: 50px 100px;
+  padding: 50px 5px;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -259,13 +266,14 @@
 }
 
 .team {
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 20px;
+  display: flex;
+  justify-content: center;
   padding: 25px;
+  gap: 25px;
 }
 
 .member {
+  width: 45%;
   padding: 10px 20px;
   text-align: center;
   font-size: 22px;
@@ -346,4 +354,10 @@ tr:nth-child(even) {
 
 .applications > .content > .table {
   width: 100%;
+  font-size: 16px;
+}
+
+.accepted {
+  font-weight: bold;
+  color: green;
 }

@@ -82,7 +82,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Application
-        fields = ['application_id', 'student', 'college', 'stream_name', 'date_applied', 'accepted', 'accepted_by']
+        fields = ['application_id', 'student', 'college', 'stream_name', 'date_applied', 'status']
 
     def create(self, validated_data):
         return Application.objects.create(**validated_data)

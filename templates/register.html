@@ -3,53 +3,68 @@
 <title>Register</title>
 {% endblock head %} {% block body %}
 <div class="register-section">
-    <!-- <img src="{% static 'images/book.jpg' %}" style="width: 100%; height: auto; z-index:1; position: absolute;" /> -->
-    <form method="POST" class="register-form">
+  <!-- <img src="{% static 'images/book.jpg' %}" style="width: 100%; height: auto; z-index:1; position: absolute;" /> -->
+  <form method="POST" class="register-form">
     <div class="student">
-        <img src="{% static 'images/student.png' %}" class="student-img" />
-        <label class="container">I am Student
-            <input type="radio" checked="checked" name="usertype" value="S">
-            <span class="checkmark"></span>
-        </label>
+      <img src="{% static 'images/student.png' %}" class="student-img" />
+      <label class="container"
+        >I am Student
+        <input type="radio" checked="checked" name="usertype" value="S" />
+        <span class="checkmark"></span>
+      </label>
     </div>
     <div class="register-box">
-        <img src="{% static 'images/avatar.png' %}" class="avatar" />
-        <h1>Sign up</h1>
-        
-            {% csrf_token %}
-                <p>Username</p>
-                <input type="text" class="username" name="username" placeholder="Enter Username" />
-                <div class="name">
-                    <div>
-                        <p>First Name</p>
-                        <input type="text" name="first_name" placeholder="Enter Firstname" />
-                    </div>
-                    <div>
-                        <p>Last Name</p>
-                        <input type="text" name="last_name" placeholder="Enter lastname" />
-                    </div>
-                </div>
-                <p>E-mail</p>
-                <input type="text" name="email" placeholder="Enter E-mail" />
-                <div class="password">
-                    <div>
-                        <p>Password</p>
-                        <input type="password" name="password1" placeholder="Enter Password" />
-                    </div>
-                    <div>
-                        <p>Confirm Password</p>
-                        <input type="password" name="password2" placeholder="Enter Password" />
-                    </div>
-                </div>
-            <input type="submit" value="Register" />
+      <img src="{% static 'images/avatar.png' %}" class="avatar" />
+      <h1>Sign up</h1>
+
+      {% csrf_token %}
+      <p>Username</p>
+      <input
+        type="text"
+        class="username"
+        name="username"
+        placeholder="Enter Username"
+      />
+      <div class="name">
+        <div>
+          <p>First Name</p>
+          <input type="text" name="first_name" placeholder="Enter Firstname" />
+        </div>
+        <div>
+          <p>Last Name</p>
+          <input type="text" name="last_name" placeholder="Enter lastname" />
+        </div>
+      </div>
+      <p>E-mail</p>
+      <input type="text" name="email" placeholder="Enter E-mail" />
+      <div class="password">
+        <div>
+          <p>Password</p>
+          <input
+            type="password"
+            name="password1"
+            placeholder="Enter Password"
+          />
+        </div>
+        <div>
+          <p>Confirm Password</p>
+          <input
+            type="password"
+            name="password2"
+            placeholder="Enter Password"
+          />
+        </div>
+      </div>
+      <input type="submit" value="Register" />
     </div>
     <div class="college">
-        <img src="{% static 'images/college.png' %}" class="college-img" />
-        <label class="container">I am College Admin
-            <input type="radio" name="usertype" value="A">
-            <span class="checkmark"></span>
-        </label>
+      <img src="{% static 'images/college.png' %}" class="college-img" />
+      <label class="container"
+        >I am College Admin
+        <input type="radio" name="usertype" value="A" />
+        <span class="checkmark"></span>
+      </label>
     </div>
-    </form>
+  </form>
 </div>
 {% endblock body %}

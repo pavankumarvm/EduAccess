@@ -1,5 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+
+body {
+  font-size: 20px;
+  font-family: "Work Sans", sans-serif;
+}
+
 .carousel-caption h5 {
- 
   font-weight: 600;
   font-size: 50px;
 
@@ -21,7 +27,12 @@
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
@@ -55,9 +66,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-scroller .nav-link {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: .875rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .card-img-right {
@@ -70,9 +81,13 @@ h1, h2, h3, h4, h5, h6 {
   flex: 0 0 auto;
 }
 
-.h-250 { height: 250px; }
+.h-250 {
+  height: 250px;
+}
 @media (min-width: 768px) {
-  .h-md-250 { height: 250px; }
+  .h-md-250 {
+    height: 250px;
+  }
 }
 
 /* Pagination */
@@ -90,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 4rem;
 }
 .blog-post-title {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
   font-size: 2.5rem;
 }
 .blog-post-meta {
@@ -106,8 +121,51 @@ h1, h2, h3, h4, h5, h6 {
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
-  border-top: .05rem solid #e5e5e5;
+  border-top: 0.05rem solid #e5e5e5;
 }
 .blog-footer p:last-child {
   margin-bottom: 0;
+}
+
+.main {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  z-index: 10;
+  width: 100%;
+  padding: 50px;
+  margin: auto;
+  color: white;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.main > h1 {
+  font-size: 45px;
+}
+.main > p {
+  font-size: 32px;
+  background-color: #777;
+}
+
+.desc {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 45% 45%;
+  grid-gap: 5%;
+  padding: 2.5%;
+}
+
+.student,
+.college {
+  text-align: left;
+  font-size: 36px;
+}
+
+.student > p,
+.college > p {
+  font-size: 22px;
+  text-justify: distribute;
+  background-color: #777;
 }

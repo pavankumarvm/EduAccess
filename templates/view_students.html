@@ -1,74 +1,157 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/view_students.css' %}" />
-    <title>View Students</title>
-{% endblock head %}
-{% block body %}
-    <div class="viewstudents">
-        <h1>View Students</h1>
-        <div class="intro">
-            Hii {{ user.username }},<br>
-            <span>
-                Here you can view all the possible applications by students that came for your various courses in your college.
-            </span>
-        </div>
-        {% if not applications %}
-            <div class="noapplications">
-                Students yet have to apply for yor college.
-            </div>
-        {% else %}
-            <div class="applications">
-                <table class="table">
-                    <thead class="thead">
-                        <tr>
-                            <th>Stream</th>
-                            <th>Student Name</th>
-                            <th>Aptitude Result</th>
-                            <th>Tenth Percentage</th>
-                            <th>Twelth Percentage</th>
-                            <!-- <th>View Profile</th> -->
-                            <th>Status</th>
-                        </tr>    
-                    </thead>
-                    <tbody>
-                        {% for student in applications %}
-                            <tr class="stream" id="{{ student.application_id }}">
-                                <td>{{ student.stream_name }}</td>
-                                <td>{{ student.full_name }}</td>
-                                <td>{{ student.result }}</td>
-                                <td>{{ student.tenth_per }}</td>
-                                <td>{{ student.twelth_per }}</td>
-                                <!-- <td><a href="#">View Profile</a></td> -->
-                                {% if not student.accepted %}
-                                <td>
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <button type="submit" value="{{ student.application_id }}" name="application_id" class="accept"><a>Accept</a></button>
-                                    </form>
-                                </td>
-                                {% else %}
-                                <td class="accepted">Accepted</td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <div class="view_profile hide">
-                    <div class="profile">
-                        <p>Full Name: {{ student.full_name }}</p>
-                        <p>Date of Birth: {{ student.birth_date }}</p>
-                        <p>Gender: {{ student.gender }}</p>
-                        <p>Tenth Board: {{ student.tenth_brd }}</p>
-                        <p>Tenth Percentage: {{ student.tenth_per }}</p>
-                        <p>Twelth Stream: {{ student.twelth_stream }}</p>
-                        <p>Twelth Board: {{ student.twelth_brd }}</p>
-                        <p>Twelth Percentage: {{ student.twelth_per }}</p>
-                        <p>Applied for: {{ student.stream_name }}</p>
-                        <p>Aptitude Test Score: {{ student.result }}</p>
-                    </div>
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/view_students.css' %}"
+/>
+<title>View Students</title>
+{% endblock head %} {% block body %}
+<div class="viewstudents">
+  <h1>View Students</h1>
+  <div class="intro">
+    Hii {{ user.username }},<br />
+    <span>
+      Here you can view all the possible applications by students that came for
+      your various courses in your college.
+    </span>
+  </div>
+  {% if not applications %}
+  <div class="noapplications">Students yet have to apply for yor college.</div>
+  {% else %}
+  <div class="applications">
+    <table class="table">
+      <thead class="thead">
+        <tr>
+          <th>Stream</th>
+          <th>Student Name</th>
+          <th>Aptitude Result</th>
+          <th>Tenth Percentage</th>
+          <th>Twelth Percentage</th>
+          <th>View Profile</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in applications %}
+        <tr class="stream" id="{{ student.application_id }}">
+          <td>{{ student.stream_name }}</td>
+          <td>{{ student.full_name }}</td>
+          <td>{{ student.result }}</td>
+          <td>{{ student.tenth_per }}</td>
+          <td>{{ student.twelth_per }}</td>
+          <td>
+            <a
+              href="#"
+              onclick="showProfile(this.id)"
+              id="id_{{ student.application_id }}"
+              >View Profile</a
+            >
+            <div class="view_profile" id="pId_{{ student.application_id }}">
+              <div class="profile">
+                <div class="profile-header">
+                  <h2>View Profile</h2>
+                  <div
+                    class="close"
+                    onclick="hideProfile(this.id)"
+                    id="cl_{{ student.application_id }}"
+                  >
+                    &times;
+                  </div>
                 </div>
+                <hr />
+                <p class="col1">Full Name:<b>{{ student.full_name }}</b></p>
+                <div class="col2">
+                  <p class="col1">
+                    Date of Birth:<b>{{ student.birth_date }}</b>
+                  </p>
+                  <p class="col1">Gender:<b>{{ student.gender }}</b></p>
+                </div>
+                <div class="col2">
+                  <p class="col1">Tenth Board:<b>{{ student.tenth_brd }}</b></p>
+                  <p class="col1">
+                    Tenth Percentage:<b>{{ student.tenth_per }}</b>
+                  </p>
+                </div>
+                <p class="col1">
+                  Twelth Stream:<b>{{ student.twelth_stream }}</b>
+                </p>
+                <div class="col2">
+                  <p class="col1">
+                    Twelth Board:<b>{{ student.twelth_brd }}</b>
+                  </p>
+                  <p class="col1">
+                    Twelth Percentage:<b>{{ student.twelth_per }}</b>
+                  </p>
+                </div>
+                <div class="col2">
+                  <p class="col1">
+                    Applied for:<b>{{ student.stream_name }}</b>
+                  </p>
+                  <p class="col1">
+                    Aptitude Test Score:<b>{{ student.result }}</b>
+                  </p>
+                </div>
+                <div class="col3">
+                  {% ifequal student.status "N" %}
+                  <div>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <button
+                        type="submit"
+                        value="{{ student.application_id }}"
+                        name="application_id"
+                        class="accept"
+                      >
+                        <a>Accept Application</a>
+                      </button>
+                    </form>
+                  </div>
+                  {% else %} {% ifequal student.status "U" %}
+                  <div>Not Available to Accept</div>
+                  {% else %}
+                  <div class="accepted">Accepted</div>
+                  {% endifequal %} {% endifequal %}
+                </div>
+              </div>
             </div>
-        {% endif %}
-    </div>
+          </td>
+          {% ifequal student.status "N" %}
+          <td>
+            <form method="POST">
+              {% csrf_token %}
+              <button
+                type="submit"
+                value="{{ student.application_id }}"
+                name="application_id"
+                class="accept"
+              >
+                <a>Accept</a>
+              </button>
+            </form>
+          </td>
+          {% else %} {% ifequal student.status "U" %}
+          <td>Not Available</td>
+          {% else %}
+          <td class="accepted">Accepted</td>
+          {% endifequal %} {% endifequal %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+<script>
+  let showProfile = (id) => {
+    let profile_id = "pId_" + id.substr(3);
+    let profile = document.getElementById(profile_id);
+    profile.style.display = "block";
+  };
+
+  let hideProfile = (id) => {
+    let profile_id = "pId_" + id.substr(3);
+    let profile = document.getElementById(profile_id);
+    profile.style.display = "none";
+  };
+</script>
 {% endblock body %}

@@ -75,7 +75,7 @@ class SeekCollegeView(TemplateView):
 		return render(request, template_name='seekcollege.html', context=data)
 
 
-def addQuestions():
+def addQuestions(request):
 	path = os.path.join(BASE_DIR , 'questions.xlsx')
 	# print(path)
 	df = pd.read_excel(path)
@@ -92,6 +92,7 @@ def addQuestions():
 				option_D= row['option_D'],
 				answer= row['answer'],
 				explanation= row['explanation'],
+				given_by=request.user
 			)
 	
 
@@ -102,7 +103,7 @@ class AptitudeTestView(TemplateView):
 	def get(self, request):
 		# Question.objects.all().delete()
 		# if Question.objects.count() == 0:
-		# 	addQuestions()
+		# 	addQuestions(request)
 		queryset = Question.objects.all()
 		all_questions = []
 		for query in queryset:
@@ -187,7 +188,7 @@ class StudentProfileView(TemplateView):
 			user = serializer.data
 
 			if not Student.objects.filter(user=User):
-				student = Student.objects.create(user=User)
+				student = Student.objects.create(user=User, full_name=(User.first_name + " " + User.last_name))
 				student.save()
 			else:
 				student = Student.objects.get(user=User)
@@ -211,10 +212,6 @@ class StudentProfileView(TemplateView):
 				college = College.objects.get(college_id=application['college'])
 				application['college_name'] = college.college_name
 				application['college_city'] = college.college_city
-				if application['accepted'] == True and application['accepted_by'] == college.college_id:
-					application['status'] = True
-				else:
-					application['status'] = False
 				applications.append(application)
 
 			data = {
@@ -246,6 +243,7 @@ class StudentProfileView(TemplateView):
 					messages.error(request, 'Username already taken.')
 			else:
 				messages.success(request, 'Username updated successfully.')
+			return redirect('/dashboard/' + user.username)
 
 		elif 'update_email' in request.POST:
 			# Using this form
@@ -478,6 +476,7 @@ class ApplicationsView(TemplateView):
 			student = Student.objects.get(student_id=application['student'])
 			serializer = StudentSerializer(student)
 			application = {**application, **serializer.data}
+			# print(application)
 			tests = Test.objects.filter(student_id=application['student'])
 			results = [0]
 			for test_obj in tests:
@@ -496,15 +495,18 @@ class ApplicationsView(TemplateView):
 	def post(self,request):
 		application_id = request.POST.get('application_id')
 		application = Application.objects.get(application_id=application_id)
-		college = application.college
-		application.accepted_by = college
-		application.save()
 		student = Student.objects.get(student_id=application.student_id)
+
+		# Mark all of the applications of student as Unavailable
 		queryset = Application.objects.filter(student=student)
-		for application in queryset:
-			application.accepted = True
-			application.accepted_by = college
-			application.save()
+		for appl in queryset:
+			appl.status = "U"
+			appl.save()
+
+		# Accept the particular application
+		application.status = "A"
+		application.save()
+
 		return redirect('/view_students/')
 
 

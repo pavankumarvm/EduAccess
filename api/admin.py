@@ -20,6 +20,11 @@ class StudentAdmin(ModelAdmin):
     )
 
 
+class CollegeAdmin(ModelAdmin):
+    ordering = ('user',)
+    list_display = ('user', 'college_name', 'college_city',)
+    search_fields = ('user', 'college_name','college_city',)
+
 class SubjectAdmin(ModelAdmin):
     ordering = ('subject_id',)
     fieldsets = (
@@ -36,7 +41,9 @@ class QuestionAdmin(ModelAdmin):
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Subject, SubjectAdmin)
+admin.site.register(College, CollegeAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Test)
 admin.site.register(Application)
+admin.site.register(Stream)
 admin.site.register(Feedback)

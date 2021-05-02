@@ -1,329 +1,460 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/dashboard.css' %}"
+/>
 <title>DashBoard</title>
-{% endblock head %}
-{% block body %}
+{% endblock head %} {% block body %}
 <div class="dashboard">
-	<div class="side-panel">
-		<p class="title">Dashboard</p>
-		<div class="options" id="options-list">
-			<li class="option-item">
-				Personal Details
-			</li>
-			<li class="option-item">
-				Academic Details
-			</li>
-			<li class="option-item">
-				My Applications
-			</li>
-			<li class="option-item">
-				Change Username/Email
-			</li>
-			<li class="option-item">
-				Change Password
-			</li>
-			<li class="option-item">
-				About Us
-			</li>
-		</div>
-	</div>
-	<div class="content-page" id="content-page">
-		<div class="page">
-			<div class="personal">
-				<div class="header">Your Personal Details</div>
-				<div class="content">
-					<form method="POST">
-						{% csrf_token %}
-						<li class="form-element">
-							<label for="first_name">First Name:</label>
-							<input class="input_box" value="{{student.first_name}}" name="first_name" id="first_name" readonly />
-						</li>
-						<li class="form-element">
-							<label for="last_name">Last Name:</label>
-							<input class="input_box" value="{{student.last_name}}" name="last_name" id="last_name" readonly />
-						</li>
-						<li class="form-element">
-							<label for="full_name">Full Name:</label>
-							<input class="input_box" value="{{student.full_name}}" name="full_name" id="full_name" readonly />
-						</li>
-						<li class="form-element">
-							<label for="gender">Gender:</label>
-							<input class="input_box" value="{{student.gender}}" name="gender" id="gender" readonly />
-						</li>
-						<li class="form-element">
-							<label for="birth_date">DOB:</label>
-							<input type="date" class="input_box" value="{{student.birth_date}}" name="birth_date" id="birth_date" readonly />
-						</li>
-						<div class="submit-section">
-							<button type="button" id="update_personal" class="update" onclick="showSubmit()">Update Details</button>
-							<button type="submit" name="update_personal" id="submit_personal" class="submit hide" onclick="showUpdate()">Save Details</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="page hide">
-			<div class="academic">
-				<div class="header">Your Academic Details</div>
-				<div class="content">
-					<form method="POST">
-						{% csrf_token %}
-						<div class="overview">
-							<div class="tenth">
-								<div class="overviewcard">
-									<div class="board">Tenth Board:</div>
-									<select name="tenth_brd" class="input_box2" readonly>
-										<option value="{{ student.tenth_brd }}" selected>{{ student.tenth_brd }}</option>
-										<option value="SB">SB(State Board)</option>
-										<option value="CBSE">CBSE</option>
-										<option value="ICSE">ICSE</option>
-										<option vlaue="IB">IB(International Board)</option>
-									</select>
-								</div>
-								<div class="overviewcard">
-									<div class="percentage">Tenth Percentage:</div>
-									<input type="text" class="input_box2" name="tenth_per" value="{{ student.tenth_per }}" placholder="Enter" readonly />
-								</div>
-							</div>
-							<div class="twelth">
-								<div class="overviewcard">
-									<div class="board">Twelth Board:</div>
-									<select name="twelth_brd" class="input_box2" readonly>
-										<option value="{{ student.tenth_brd }}" selected>{{ student.tenth_brd }}</option>
-										<option value="SB">SB(State Board)</option>
-										<option value="CBSE">CBSE</option>
-										<option value="ICSE">ICSE</option>
-										<option vlaue="IB">IB(International Board)</option>
-									</select>
-								</div>
-								<div class="overviewcard">
-									<div class="percentage">Twelth Percentage:</div>
-									<input type="text" class="input_box2" name="twelth_per" value="{{ student.twelth_per }}" placholder="Enter" readonly />
-								</div>
-							</div>
-							<div class="stream">
-								<div class="twelth_stream">Twelth Stream</div>
-								<select id="stream" class="input_box2" name="twelth_stream" readonly>
-									<option value="{{ student.twelth_stream }}">{{ student.twelth_stream }}</option>
-									<option value="Science">Science</option>
-									<option value="Commerce">Commerce</option>
-									<option value="Arts">Arts</option>
-								</select>
-							</div>
-						</div>
-						<div class="submit-section">
-							<button type="button" id="update_academic" class="update" onclick="showSubmit1()">Update Academic Details</button>
-							<button type="submit" name="update_academic" id="submit_academic" class="submit hide"  onclick="showUpdate1()">Save Details</button>
-						</div>
-					</form>
-					<hr>
-					<div class="subject">
-						<h1>Subjects</h1>
-						<div class="add_subject">
-							<p class="add_subject">Add Subject</p>
-							<form method="POST">
-								{% csrf_token %}
-								<label for="std">Standard:</label>
-								<select name="std" required>
-									<option value="">----</option>
-									<option value="10th">10<super>th</super></option>
-									<option value="12th">12<super>th</super></option>
-								</select>
-								<label for="sub_name">Subject:</label>
-								<input class="input_sub" name="sub_name" id="sub_name" placeholder="Enter Subject"/>
-								<label for="marks">Marks:</label>
-								<input type="number" class="input_sub" name="marks" id="marks" placeholder="Enter Marks"/>
-								<button type="submit" name="add_subject">Add Subject</button>
-							</form>
-						</div>
-						<table class="table">
-							<thead class="thead">
-								<tr>
-									<th>Standard</th>
-									<th>Subject</th>
-									<th>Marks</th>
-									<th>Remove Subject</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for subject in subjects %}
-									<tr id="{{ subject.subject_id }}">
-										<td>{{subject.std}}</td>
-										<td>{{subject.sub_name}}</td>
-										<td>{{subject.marks}}</td>
-										<td>
-											<form method="POST">
-												{% csrf_token %}
-												<button type="submit" value="{{ subject.subject_id }}" name="remove_subject" class="remove">Remove</button>
-											</form>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="page hide">
-			<div class="applications">
-				<div class="header">My Applications</div>
-				<div class="content">
-					<table class="table">
-						<thead class="thead">
-							<tr>
-								<th>Date Applied</th>
-								<th>Stream</th>
-								<th>College Name</th>
-								<th>College City</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for application in applications%}
-								<tr id="{{ application.application_id }}">
-									<td> {{ application.date_applied }} </td>
-									<td> {{ application.stream_name }} </td>
-									<td> {{ application.college_name }} </td>
-									<td> {{ application.college_city }} </td>
-									<td>
-										{% if application.status %}
-											Accepted
-										{% else %}
-											Not accepted
-										{% endif %}
-									</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="page hide">
-			<div class="content">
-				<div class="change_username">
-					<h1>Update username</h1>
-					<form method="POST">
-						{% csrf_token %}
-						  <label for="username">Username:</label>
-						  <input class="input_box edit" value="{{user.username}}" name="new_username" id="username"/>
-						  <button type="submit" name="update_username" class="submit">Update Username</button>
-					</form>
-				</div>
-				<div class="change_email">
-					<h1>Update Email</h1>
-					<form method="POST">
-						{% csrf_token %}
-						  <label for="email">Old Email Id:</label>
-						  <input class="input_box edit" value="{{user.email}}" name="email" id="email" readonly/>
-						  <label for="new_email">New Email Id:</label>
-						  <input type="email" class="input_box edit" placeholder="Enter Email" name="new_email" id="new_email" required/>
-						  <button type="submit" name="update_email" class="submit">Update Email</button>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="page hide">
-			<div class="change_password">
-				<h1>Change Password</h1>
-				<form method="POST">
-					{% csrf_token %}
-					  <label for="old_password">Old Password:</label>
-					  <input type="password" class="input_box edit" name="old_password" id="old_password"/>
-					  <label for="new_password">New Password:</label>
-					  <input type="password" class="input_box edit" name="new_password" id="new_password"/>
-					  <label for="confirm_password">Confirm New Password:</label>
-					  <input type="password" class="input_box edit" name="confirm_password" id="confirm_password"/>
-					  <button type="submit" name="change_password" class="submit">Change Password</button>
-				</form>
-			</div>
-		</div>
-		<div class="page hide">
-			<div class="header">
-				<div class="heading">Meet Our Team</div>
-			</div>
-			<div class="content">
-				<div class="team">
-					<div class="member">
-						Pavankumar Maurya
-					</div>
-					<div class="member">
-						Suryakant Kashyap
-					</div>
-					<div class="member">
-						Bhaskar Maheshwari
-					</div>
-				</div>
-				<div class="feedback">
-					<h6 class="feedback-info">If you like our work, then please share your feedback.</h6>
-					<a class="anchor" href="/feedback/">Feedback Us</a>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="side-panel">
+    <p class="title">Dashboard</p>
+    <div class="options" id="options-list">
+      <li class="option-item">Personal Details</li>
+      <li class="option-item">Academic Details</li>
+      <li class="option-item">My Applications</li>
+      <li class="option-item">Change Username/Email</li>
+      <li class="option-item">Change Password</li>
+      <li class="option-item">About Us</li>
+    </div>
+  </div>
+  <div class="content-page" id="content-page">
+    <div class="page">
+      <div class="personal">
+        <div class="header">Your Personal Details</div>
+        <div class="content">
+          <form method="POST">
+            {% csrf_token %}
+            <li class="form-element">
+              <label for="first_name">First Name:</label>
+              <input
+                class="input_box"
+                value="{{student.first_name}}"
+                name="first_name"
+                id="first_name"
+                readonly
+              />
+            </li>
+            <li class="form-element">
+              <label for="last_name">Last Name:</label>
+              <input
+                class="input_box"
+                value="{{student.last_name}}"
+                name="last_name"
+                id="last_name"
+                readonly
+              />
+            </li>
+            <li class="form-element">
+              <label for="full_name">Full Name:</label>
+              <input
+                class="input_box"
+                value="{{student.full_name}}"
+                name="full_name"
+                id="full_name"
+                readonly
+              />
+            </li>
+            <li class="form-element">
+              <label for="gender">Gender:</label>
+              <input
+                class="input_box"
+                value="{{student.gender}}"
+                name="gender"
+                id="gender"
+                readonly
+              />
+            </li>
+            <li class="form-element">
+              <label for="birth_date">DOB:</label>
+              <input
+                type="date"
+                class="input_box"
+                value="{{student.birth_date}}"
+                name="birth_date"
+                id="birth_date"
+                readonly
+              />
+            </li>
+            <div class="submit-section">
+              <button
+                type="button"
+                id="update_personal"
+                class="update"
+                onclick="showSubmit()"
+              >
+                Update Details
+              </button>
+              <button
+                type="submit"
+                name="update_personal"
+                id="submit_personal"
+                class="submit hide"
+                onclick="showUpdate()"
+              >
+                Save Details
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="page hide">
+      <div class="academic">
+        <div class="header">Your Academic Details</div>
+        <div class="content">
+          <form method="POST">
+            {% csrf_token %}
+            <div class="overview">
+              <div class="tenth">
+                <div class="overviewcard">
+                  <div class="board">Tenth Board:</div>
+                  <select name="tenth_brd" class="input_box2" readonly>
+                    <option value="{{ student.tenth_brd }}" selected>
+                      {{ student.tenth_brd }}
+                    </option>
+                    <option value="SB">SB(State Board)</option>
+                    <option value="CBSE">CBSE</option>
+                    <option value="ICSE">ICSE</option>
+                    <option vlaue="IB">IB(International Board)</option>
+                  </select>
+                </div>
+                <div class="overviewcard">
+                  <div class="percentage">Tenth Percentage:</div>
+                  <input
+                    type="text"
+                    class="input_box2"
+                    name="tenth_per"
+                    value="{{ student.tenth_per }}"
+                    placholder="Enter"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="twelth">
+                <div class="overviewcard">
+                  <div class="board">Twelth Board:</div>
+                  <select name="twelth_brd" class="input_box2" readonly>
+                    <option value="{{ student.tenth_brd }}" selected>
+                      {{ student.tenth_brd }}
+                    </option>
+                    <option value="SB">SB(State Board)</option>
+                    <option value="CBSE">CBSE</option>
+                    <option value="ICSE">ICSE</option>
+                    <option vlaue="IB">IB(International Board)</option>
+                  </select>
+                </div>
+                <div class="overviewcard">
+                  <div class="percentage">Twelth Percentage:</div>
+                  <input
+                    type="text"
+                    class="input_box2"
+                    name="twelth_per"
+                    value="{{ student.twelth_per }}"
+                    placholder="Enter"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="stream">
+                <div class="twelth_stream">Twelth Stream</div>
+                <select
+                  id="stream"
+                  class="input_box2"
+                  name="twelth_stream"
+                  readonly
+                >
+                  <option value="{{ student.twelth_stream }}">
+                    {{ student.twelth_stream }}
+                  </option>
+                  <option value="Science">Science</option>
+                  <option value="Commerce">Commerce</option>
+                  <option value="Arts">Arts</option>
+                </select>
+              </div>
+            </div>
+            <div class="submit-section">
+              <button
+                type="button"
+                id="update_academic"
+                class="update"
+                onclick="showSubmit1()"
+              >
+                Update Academic Details
+              </button>
+              <button
+                type="submit"
+                name="update_academic"
+                id="submit_academic"
+                class="submit hide"
+                onclick="showUpdate1()"
+              >
+                Save Details
+              </button>
+            </div>
+          </form>
+          <hr />
+          <div class="subject">
+            <h1>Subjects</h1>
+            <div class="add_subject">
+              <p class="add_subject">Add Subject</p>
+              <form method="POST">
+                {% csrf_token %}
+                <label for="std">Standard:</label>
+                <select name="std" required>
+                  <option value="">----</option>
+                  <option value="10th">10<super>th</super></option>
+                  <option value="12th">12<super>th</super></option>
+                </select>
+                <label for="sub_name">Subject:</label>
+                <input
+                  class="input_sub"
+                  name="sub_name"
+                  id="sub_name"
+                  placeholder="Enter Subject"
+                  required
+                />
+                <label for="marks">Marks:</label>
+                <input
+                  type="number"
+                  class="input_sub"
+                  name="marks"
+                  id="marks"
+                  placeholder="Enter Marks"
+                  required
+                />
+                <button type="submit" name="add_subject">Add Subject</button>
+              </form>
+            </div>
+            <table class="table">
+              <thead class="thead">
+                <tr>
+                  <th>Standard</th>
+                  <th>Subject</th>
+                  <th>Marks</th>
+                  <th>Remove Subject</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for subject in subjects %}
+                <tr id="{{ subject.subject_id }}">
+                  <td>{{subject.std}}</td>
+                  <td>{{subject.sub_name}}</td>
+                  <td>{{subject.marks}}</td>
+                  <td>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <button
+                        type="submit"
+                        value="{{ subject.subject_id }}"
+                        name="remove_subject"
+                        class="remove"
+                      >
+                        Remove
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page hide">
+      <div class="applications">
+        <div class="header">My Applications</div>
+        <div class="content">
+          <table class="table">
+            <thead class="thead">
+              <tr>
+                <th>Date Applied</th>
+                <th>Stream</th>
+                <th>College Name</th>
+                <th>College City</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for application in applications%}
+              <tr id="{{ application.application_id }}">
+                <td>{{ application.date_applied }}</td>
+                <td>{{ application.stream_name }}</td>
+                <td>{{ application.college_name }}</td>
+                <td>{{ application.college_city }}</td>
+                {% ifequal application.status "A"%}
+                <td class="accepted">Accepted</td>
+                {% else %} {% ifequal application.status "N"%}
+                <td>In Process</td>
+                {% else %}
+                <td>Rejected</td>
+                {% endifequal %} {% endifequal %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="page hide">
+      <div class="content">
+        <div class="change_username">
+          <h1>Update username</h1>
+          <form method="POST">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input
+              class="input_box edit"
+              value="{{user.username}}"
+              name="new_username"
+              id="username"
+            />
+            <button type="submit" name="update_username" class="submit">
+              Update Username
+            </button>
+          </form>
+        </div>
+        <div class="change_email">
+          <h1>Update Email</h1>
+          <form method="POST">
+            {% csrf_token %}
+            <label for="email">Old Email Id:</label>
+            <input
+              class="input_box edit"
+              value="{{user.email}}"
+              name="email"
+              id="email"
+              readonly
+            />
+            <label for="new_email">New Email Id:</label>
+            <input
+              type="email"
+              class="input_box edit"
+              placeholder="Enter Email"
+              name="new_email"
+              id="new_email"
+              required
+            />
+            <button type="submit" name="update_email" class="submit">
+              Update Email
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="page hide">
+      <div class="change_password">
+        <h1>Change Password</h1>
+        <form method="POST">
+          {% csrf_token %}
+          <label for="old_password">Old Password:</label>
+          <input
+            type="password"
+            class="input_box edit"
+            name="old_password"
+            id="old_password"
+          />
+          <label for="new_password">New Password:</label>
+          <input
+            type="password"
+            class="input_box edit"
+            name="new_password"
+            id="new_password"
+          />
+          <label for="confirm_password">Confirm New Password:</label>
+          <input
+            type="password"
+            class="input_box edit"
+            name="confirm_password"
+            id="confirm_password"
+          />
+          <button type="submit" name="change_password" class="submit">
+            Change Password
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="page hide">
+      <div class="header">
+        <div class="heading">Meet Our Team</div>
+      </div>
+      <div class="content">
+        <div class="team">
+          <div class="member">Pavankumar Maurya</div>
+        </div>
+        <div class="team">
+          <div class="member">Suryakant Kashyap</div>
+          <div class="member">Bhaskar Maheshwari</div>
+        </div>
+        <div class="feedback">
+          <h6 class="feedback-info">
+            If you like our work, then please share your feedback.
+          </h6>
+          <a class="anchor" href="/feedback/">Feedback Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
-	var options = document.getElementById('options-list');
-	var pages = document.getElementById('content-page');
-	var previous_page = 0;
-	for(let i=0; i<options.children.length; i++){
-		(function(index){
-			options.children[i].onclick = function(){
-				if(previous_page != i){
-					pages.children[previous_page].classList.add('hide');
-					pages.children[i].classList.remove('hide');
-					previous_page = i;
-				}
-			}    
-		})(i); 
-	}
+  var options = document.getElementById("options-list");
+  var pages = document.getElementById("content-page");
+  var previous_page = 0;
+  for (let i = 0; i < options.children.length; i++) {
+    (function (index) {
+      options.children[i].onclick = function () {
+        if (previous_page != i) {
+          pages.children[previous_page].classList.add("hide");
+          pages.children[i].classList.remove("hide");
+          previous_page = i;
+        }
+      };
+    })(i);
+  }
 
-	
-	var submitbutton = document.getElementById('submit_personal');
-	var updatebutton = document.getElementById('update_personal');
-	var input_boxes = document.getElementsByClassName('input_box');
+  var submitbutton = document.getElementById("submit_personal");
+  var updatebutton = document.getElementById("update_personal");
+  var input_boxes = document.getElementsByClassName("input_box");
 
-	function showSubmit(){
-		submitbutton.classList.remove('hide');
-		updatebutton.classList.add('hide');
-		for(let i=0; i<input_boxes.length; i++){
-			input_boxes[i].readOnly = false;
-			input_boxes[i].classList.add('edit');
-		}
-	}
+  function showSubmit() {
+    submitbutton.classList.remove("hide");
+    updatebutton.classList.add("hide");
+    for (let i = 0; i < input_boxes.length; i++) {
+      input_boxes[i].readOnly = false;
+      input_boxes[i].classList.add("edit");
+    }
+  }
 
-	function showUpdate(){
-		submitbutton.classList.add('hide');
-		updatebutton.classList.remove('hide');
-		for(let i=0; i<input_boxes.length; i++){
-			input_boxes[i].readOnly = true;
-			input_boxes[i].classList.remove('edit');
-		}
-	}
+  function showUpdate() {
+    submitbutton.classList.add("hide");
+    updatebutton.classList.remove("hide");
+    for (let i = 0; i < input_boxes.length; i++) {
+      input_boxes[i].readOnly = true;
+      input_boxes[i].classList.remove("edit");
+    }
+  }
 
-	var submitbutton1 = document.getElementById('submit_academic');
-	var updatebutton1 = document.getElementById('update_academic');
-	var input_boxes1 = document.getElementsByClassName('input_box2');
+  var submitbutton1 = document.getElementById("submit_academic");
+  var updatebutton1 = document.getElementById("update_academic");
+  var input_boxes1 = document.getElementsByClassName("input_box2");
 
-	function showSubmit1(){
-		submitbutton1.classList.remove('hide');
-		updatebutton1.classList.add('hide');
-		for(let i=0; i<input_boxes.length; i++){
-			input_boxes1[i].readOnly = false;
-			input_boxes1[i].classList.add('edit');
-		}
-	}
+  function showSubmit1() {
+    submitbutton1.classList.remove("hide");
+    updatebutton1.classList.add("hide");
+    for (let i = 0; i < input_boxes.length; i++) {
+      input_boxes1[i].readOnly = false;
+      input_boxes1[i].classList.add("edit");
+    }
+  }
 
-	function showUpdate1(){
-		submitbutton1.classList.add('hide');
-		updatebutton1.classList.remove('hide');
-		for(let i=0; i<input_boxes.length; i++){
-			input_boxes1[i].readOnly = true;
-			input_boxes1[i].classList.remove('edit');
-		}
-	}
+  function showUpdate1() {
+    submitbutton1.classList.add("hide");
+    updatebutton1.classList.remove("hide");
+    for (let i = 0; i < input_boxes.length; i++) {
+      input_boxes1[i].readOnly = true;
+      input_boxes1[i].classList.remove("edit");
+    }
+  }
 </script>
 {% endblock body %}

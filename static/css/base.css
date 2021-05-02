@@ -1,15 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
-.body{
-    font-family: "Work Sans", sans-serif;
+body {
+  font-size: 20px;
+  font-family: "Work Sans", sans-serif;
 }
 
-.alert{
-    position: absolute;
-    margin: 0px 20%;
-    width: 60%;
-    height: auto;
-    z-index: 10000;
-    margin-top: 36%;
-    text-align: center;
+.alert {
+  position: absolute;
+  margin: 0px 20%;
+  width: 60%;
+  height: auto;
+  z-index: 10000;
+  margin-top: 36%;
+  text-align: center;
 }

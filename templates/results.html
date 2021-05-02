@@ -1,30 +1,20 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <title>Test Results</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/results.css' %}" />
 
-{% endblock head %}
-
-{% block body %}
-    <h1>Results</h1>
-    <div class="results">
-        {% if appeared %}
-            {% for test in tests %}
-                <div class="test">
-                    <div class="test-details">    
-                        <p><strong>Test ID:</strong> {{ test.test_id }}</p>
-                        <p><strong>Appeared on:</strong> {{ test.date }} at {{ test.time }}</p>
-                    </div>
-                    <p class="marks">
-                        <strong>Marks obtained:</strong> {{ test.result }}/30
-                    </p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <div class="not-appeared">
-                You have not appeared for any tests.
-            </div>
-        {% endif %}
+{% endblock head %} {% block body %}
+<h1>Results</h1>
+<div class="results">
+  {% if appeared %} {% for test in tests %}
+  <div class="test">
+    <div class="test-details">
+      <p><strong>Test ID:</strong> {{ test.test_id }}</p>
+      <p><strong>Appeared on:</strong> {{ test.date }} at {{ test.time }}</p>
     </div>
+    <p class="marks"><strong>Marks obtained:</strong> {{ test.result }}/30</p>
+  </div>
+  {% endfor %} {% else %}
+  <div class="not-appeared">You have not appeared for any tests.</div>
+  {% endif %}
+</div>
 {% endblock body %}

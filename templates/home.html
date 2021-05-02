@@ -3,15 +3,12 @@
 <title>Home</title>
 {% endblock head %} {% block body %}
 
-
-
 <div class="container-fluid px-0">
   <div
     id="carouselExampleIndicators"
     class="carousel slide"
     data-ride="carousel"
   >
-    
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img
@@ -19,17 +16,6 @@
           src="{% static 'images/1.jfif' %}"
           alt="First slide"
         />
-        <h5
-          style="
-            text-align:center;
-            
-            font-weight: 600;
-            font-size: 50px;
-            
-          "
-        >
-          Higher Education Access
-        </h5>
       </div>
       <div class="carousel-item">
         <img
@@ -37,17 +23,6 @@
           src="{% static 'images/2.jfif' %}"
           alt="Second slide"
         />
-        <h5
-          style="
-            text-align:center;
-            
-            font-weight: 600;
-            font-size: 50px;
-            
-          "
-        >
-          Higher Education Access
-        </h5>
       </div>
       <div class="carousel-item">
         <img
@@ -55,17 +30,6 @@
           src="{% static 'images/3.jfif' %}"
           alt="Third slide"
         />
-        <h5
-          style="
-            text-align:center;
-            
-            font-weight: 600;
-            font-size: 50px;
-            
-          "
-        >
-          Higher Education Access
-        </h5>
       </div>
     </div>
     <a
@@ -87,9 +51,27 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
 </div>
-
-
+<div class="main">
+  <h1>EduAccess</h1>
+  <p>Platform for both student and colleges to interact with each other.</p>
+  <div class="desc">
+    <div class="student">
+      <h2>Students</h2>
+      <p>
+        Students can search for colleges based on cut-off. Students can give
+        aptitude test designed by various colleges. Student can also view there
+        application status for particular college.
+      </p>
+    </div>
+    <div class="college">
+      <h2>Colleges</h2>
+      <p>
+        College can provide aptitude questions and view results for it. College
+        can also view applications from various students.
+      </p>
+    </div>
+  </div>
+</div>
 
 {% endblock body %}

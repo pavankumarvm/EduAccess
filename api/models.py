@@ -41,7 +41,7 @@ class College(models.Model):
 class Stream(models.Model):
     stream_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     college_id = models.ForeignKey(College, on_delete=models.CASCADE, related_name="streams")
-    stream_name = models.CharField(max_length=20, blank=False, null=False)
+    stream_name = models.CharField(max_length=50, blank=False, null=False)
     main_stream = models.CharField(max_length=20, blank=False, null=False)
     cut_off = models.DecimalField(decimal_places=2, max_digits=4)
 
@@ -53,10 +53,14 @@ class Application(models.Model):
     application_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
     college = models.ForeignKey(College, related_name='applied_to', on_delete=models.CASCADE, null=True)
-    stream_name = models.CharField(max_length=20, blank=True, null=True)
+    stream_name = models.CharField(max_length=50, blank=True, null=True)
     date_applied = models.DateField(auto_now_add=True)
-    accepted = models.BooleanField(default=False, null=True)
-    accepted_by = models.ForeignKey(College, related_name='accepted_by', on_delete=models.SET_NULL, null=True)
+    # For status it cal hold three following values
+    # A - Accepted
+    # N - None
+    # U - Unavailable
+    status = models.CharField(max_length=1, blank=False, null=False, default="N")
+
 
     class Meta:
         db_table = 'application'
@@ -107,6 +111,9 @@ class Feedback(models.Model):
     sno= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
     rating = models.CharField(max_length=20, choices=RATING, null=True, blank=True)
+
+    class Meta:
+        db_table = 'feedback'
 
     def __str__(self):
         return 'Message from ' + self.comment

@@ -1,56 +1,74 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/questions.css' %}"/>
-    <title>Suggest Question</title>
-{% endblock head %}
-{% block body %}
-    <div class="suggest">
-        <h1>Suggest Question</h1>
-        <div class="info">
-            Here, you can provide some questions which can be given to students in there apititude tests.
-        </div>
-        <form method="POST" class="question-form">
-            {% csrf_token %}
-            <li class="form-element">
-                <label for="category">Category:</label>
-                <input maxlength="50" name="category" class="category_box" required/>
-            </li>
-            <li class="form-element">
-                <label for="question">Question:</label>
-                <textarea maxlength="250" name="question" class="question_box" required>Enter Question</textarea>
-            </li>
-            <li class="form-element">
-                <label for="option_A">Option A:</label>
-                <textarea maxlength="250" name="option_A" class="option_box" required></textarea>
-            </li>
-            <li class="form-element">
-                <label for="option_B">Option B:</label>
-                <textarea maxlength="250" name="option_B" class="option_box" required></textarea>
-            </li>
-            <li class="form-element">
-                <label for="option_C">Option C:</label>
-                <textarea maxlength="250" name="option_C" class="option_box"></textarea>
-            </li>
-            <li class="form-element">
-                <label for="option_D">Option D:</label>
-                <textarea maxlength="250" name="option_D" class="option_box"></textarea>
-            </li>
-            <li class="form-element">
-                <label for="answer">Correct Answer:</label>
-                <select class="answer" name="answer">
-                    <option value="">-----</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </li>
-            <li class="form-element">
-                <label for="explanation">Explanation(If Any):</label>
-                <textarea maxlength="250" name="explanation" class="option_box"></textarea>    
-            </li>
-            <button type="submit" class="submit">Suggest this question</button>
-        </form>
-    </div>
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/questions.css' %}"
+/>
+<title>Suggest Question</title>
+{% endblock head %} {% block body %}
+<div class="suggest">
+  <h1>Suggest Question</h1>
+  <div class="info">
+    Here, you can provide some questions which can be given to students in there
+    apititude tests.
+  </div>
+  <form method="POST" class="question-form">
+    {% csrf_token %}
+    <li class="form-element">
+      <label for="category">Category:</label>
+      <input maxlength="50" name="category" class="category_box" required />
+    </li>
+    <li class="form-element">
+      <label for="question">Question:</label>
+      <textarea maxlength="250" name="question" class="question_box" required>
+Enter Question</textarea
+      >
+    </li>
+    <li class="form-element">
+      <label for="option_A">Option A:</label>
+      <textarea
+        maxlength="250"
+        name="option_A"
+        class="option_box"
+        required
+      ></textarea>
+    </li>
+    <li class="form-element">
+      <label for="option_B">Option B:</label>
+      <textarea
+        maxlength="250"
+        name="option_B"
+        class="option_box"
+        required
+      ></textarea>
+    </li>
+    <li class="form-element">
+      <label for="option_C">Option C:</label>
+      <textarea maxlength="250" name="option_C" class="option_box"></textarea>
+    </li>
+    <li class="form-element">
+      <label for="option_D">Option D:</label>
+      <textarea maxlength="250" name="option_D" class="option_box"></textarea>
+    </li>
+    <li class="form-element">
+      <label for="answer">Correct Answer:</label>
+      <select class="answer" name="answer">
+        <option value="">-----</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+    </li>
+    <li class="form-element">
+      <label for="explanation">Explanation(If Any):</label>
+      <textarea
+        maxlength="250"
+        name="explanation"
+        class="option_box"
+      ></textarea>
+    </li>
+    <button type="submit" class="submit">Suggest this question</button>
+  </form>
+</div>
 {% endblock body %}

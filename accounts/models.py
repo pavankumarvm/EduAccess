@@ -44,4 +44,7 @@ class Otp(models.Model):
     otp = models.CharField(max_length=6)
     otp_valid_time = models.DateTimeField(auto_now_add=True)
     no_of_attempts = models.IntegerField(default = 5)
+
+    class Meta:
+        db_table = "otp"
     
