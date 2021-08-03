@@ -55,7 +55,7 @@ class Application(models.Model):
     college = models.ForeignKey(College, related_name='applied_to', on_delete=models.CASCADE, null=True)
     stream_name = models.CharField(max_length=50, blank=True, null=True)
     date_applied = models.DateField(auto_now_add=True)
-    # For status it cal hold three following values
+    # For status it can hold three following values
     # A - Accepted
     # N - None
     # U - Unavailable

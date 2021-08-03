@@ -28,7 +28,7 @@ SECRET_KEY = 'r03g3%tj73r)+-0009rsoj+ukcv18(ap1!kt(%qj7r6*_(!pp*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['eduaccess.herokuapp.com']
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,24 +85,24 @@ WSGI_APPLICATION = 'eduaccess.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eduaccess',
-        'USER': 'root',
-        'PASSWORD': 'Pavan@2409',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'eduaccess',
+#         'USER': 'roo
+#         'PASSWORD': 'Pavan@2409',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'OPTIONS': {},
+#     }
+# }
 
 AUTH_USER_MODEL = 'accounts.EduUser'
 
