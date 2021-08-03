@@ -102,8 +102,8 @@ class AptitudeTestView(TemplateView):
 
 	def get(self, request):
 		# Question.objects.all().delete()
-		# if Question.objects.count() == 0:
-		# 	addQuestions(request)
+		if Question.objects.count() == 0:
+			addQuestions(request)
 		queryset = Question.objects.all()
 		all_questions = []
 		for query in queryset:
