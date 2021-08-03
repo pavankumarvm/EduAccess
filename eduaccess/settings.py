@@ -96,7 +96,7 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'eduaccess',
-#         'USER': 'root',
+#         'USER': 'roo
 #         'PASSWORD': 'Pavan@2409',
 #         'HOST': 'localhost',
 #         'PORT': '3306',
